@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DishorderComponent } from './dishorder/dishorder.component';
 import { RegisterComponent } from './register/register.component';
+import { ApicallService } from './services/apicall/apicall.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,9 +16,10 @@ import { RegisterComponent } from './register/register.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ApicallService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
