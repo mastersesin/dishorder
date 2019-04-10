@@ -1,0 +1,37 @@
+<div class="login-container">
+  <div class="login-wrapper">
+    <div class="load-bar" [ngStyle]="loadingState()">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    <div [ngStyle]="changeBackgroundOpacity()">
+      <div class="login-wrapper-header">
+        <div class="login-wrapper-header-logo">
+          <img src="./assets/plate-fork-and-knife.png">
+        </div>
+        <div class="login-wrapper-header-secondary">Email Sign Up</div>
+      </div>
+      <div class="form-login-wrapper">
+        <div class="wrapper-form-login-main">
+          <div class="form-login-main">
+            <input placeholder="Email" type="text" style="padding: 0px; position: relative; width: 100%; border: none; outline: none; background-color: rgba(0, 0, 0, 0); color: rgb(112, 120, 125); cursor: initial; font: inherit; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); height: 100%;">
+          </div>
+        </div>
+        <div class="form-login-main">
+          <input placeholder="Password" type="password" style="padding: 0px; position: relative; width: 100%; border: none; outline: none; background-color: rgba(0, 0, 0, 0); color: rgb(112, 120, 125); cursor: initial; font: inherit; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); height: 100%;">
+        </div>
+        <div class="form-login-main">
+          <input placeholder="Retype Password" type="password" style="padding: 0px; position: relative; width: 100%; border: none; outline: none; background-color: rgba(0, 0, 0, 0); color: rgb(112, 120, 125); cursor: initial; font: inherit; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); height: 100%;">
+        </div>
+        <div class="form-login-button">
+          <button type="submit" class="btn btn-primary">Sign Up</button>
+        </div>
+      </div>
+      <div class="more-info">
+        <a>Forgot Password?</a>
+        <a [routerLink]="" (click)="registerAndAlreadyHaveAccountButton()" > Already have account?</a>
+      </div>
+    </div>
+  </div>
+</div>
