@@ -1,0 +1,10 @@
+<div class="container-fuild-dashboard">
+  <div class="main-body-loading" *ngIf="loading">
+    <mat-spinner [diameter]='50' ></mat-spinner>
+  </div>
+  <div class="main-body" *ngIf="!loading">
+    <div *ngFor="let item of data">
+      {{item.key}}
+    </div>
+  </div>
+</div>

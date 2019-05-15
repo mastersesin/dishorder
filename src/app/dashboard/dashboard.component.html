@@ -1,0 +1,58 @@
+<div class="container-fuild-dashboard">
+  <div class="main-body-loading" *ngIf="loading">
+    <mat-spinner [diameter]='50' ></mat-spinner>
+  </div>
+  <div class="main-body" *ngIf="!loading">
+    <div class="calendarwrapper" id="big">
+      <div class="orderday">
+        Mo
+      </div>
+      <div class="orderday">
+        Tu
+      </div>
+      <div class="orderday">
+        We
+      </div>
+      <div class="orderday">
+        Th
+      </div>
+      <div class="orderday">
+        Fr
+      </div>
+      <div class="orderday">
+        Sa
+      </div>
+      <div class="orderday">
+        Su
+      </div>
+      <div class="oderdaywrapper">
+        <div class="orderdaynumber" *ngFor="let item of data">
+          <button class="orderdaybutton">{{item.key}}</button>
+        </div>
+      </div>
+    </div>
+    <div class="favoritewrapper" id="small">
+      <div class="favoriteheader">
+        <p><i class="fas fa-star"></i> Your Favorite<p>
+      </div>
+      <div class="favoritefoodshowcontainer">
+        <div class="favoritecontent">
+          <img height=70  px src="../../assets/burger.jpg">
+          <ul>
+            <li class="first"><span>Burger Cheese Big Size</span></li>
+            <li class="second"><span>HKT Restaurant</span></li>
+            <li class="third"><span>Orders : 290 times</span></li>
+          </ul>
+        </div>
+        <div class="favoritecontent">
+          <img height=70  px src="../../assets/kfc.jpg">
+          <ul>
+            <li class="first"><span>Burger Cheese</span></li>
+            <li class="second"><span>HKT Restaurant</span></li>
+            <li class="third"><span>Orders : 290 times</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

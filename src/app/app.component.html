@@ -1,5 +1,38 @@
 <div>
-  <div class="container">
-      <router-outlet></router-outlet>
+  <div class="container-fuild">
+    <div class="mainnavdiv">
+      <span class="logo-span">
+        <ul>
+          <li><span class="logo-picture"><img style="height: 45px" src="./assets/plate-fork-and-knife-2.png"></span></li>
+          <li><span class="dishword">dish</span></li>
+          <li><span class="orderword">order</span></li>
+        </ul>
+      </span>
+      <span class="username-span-container">
+        <span class="userinfo-span">
+          Ty Tran <img style="height: 10px" src="./assets/caret-down.png" alt="">
+        </span>
+        <span class="username-picture">
+          <img style="height: 30px;border-radius: 50%;" src="https://scontent-hkg3-2.xx.fbcdn.net/v/t1.0-1/p320x320/37915537_1722032594582015_4516206765133529088_n.jpg?_nc_cat=103&_nc_oc=AQma9xzDdgJ5SGOoFCikz5dT4Xp1is58V6q5rzxoWFopXfa9YmhQgE3xmdV1ouTNlzs&_nc_ht=scontent-hkg3-2.xx&oh=85758007f6a2be28eea38668c0e89467&oe=5D3C04A2" alt="">
+        </span>
+      </span>
+    </div>
+    <div class="mainnavdiv-secondary">
+      <ul>
+        <li>
+          <button id="dashboard" (click)="onClickNavTabs('dashboard')"><i class="far fa-calendar-alt"></i> Dish Order</button>
+        </li>
+        <!-- <li>
+          <button id="favorite" (click)="onClickNavTabs('favorite')"><i class="fas fa-star"></i> Your Favorite</button>
+        </li> -->
+        <li>
+          <button id="orders" (click)="onClickNavTabs('orders')"><i class="fas fa-folder-open"></i> Order Management </button>
+        </li>
+        <li>
+          <button id="suppliers" (click)="onClickNavTabs('suppliers')"><i class="fas fa-id-card"></i> Suppliers</button>
+        </li>
+      </ul>
+    </div>
+    <router-outlet></router-outlet>
   </div>
 </div>

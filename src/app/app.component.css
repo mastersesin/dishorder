@@ -1,3 +1,155 @@
-.container {
+.container-fuild {
   height: 100vh;
+  background-image: linear-gradient(to right, #0882c4, hsl(201, 94%, 51%), #0882c4);
+  width: 100%;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container-fuild-dashboard {
+  background-color: #efefef;
+  width: 100%;
+  height: 100%;
+}
+
+.mainnavdiv {
+  display: block;
+  height: 50px;
+  padding-left:40px;
+  padding-right:40px;
+  width: 100%;
+  background-color: #099cec;
+}
+.mainnavdiv-secondary{
+  height: 50px;
+  padding: 0px 40px 0px 40px;
+  background-color: white;
+}
+
+.mainnavdiv-secondary ul {
+  height: 100%;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.mainnavdiv-secondary li {
+  font-size: 14px;
+  font-weight: 500;
+  margin-right: 10px;
+  height: 100%;
+  float: left;
+}
+
+.mainnavdiv-secondary li button {
+  border :0px;
+  -webkit-box-flex: 1;
+  -webkit-appearance: none;
+  background-color: transparent;
+  height: 100%;
+  display: block;
+  color:#27343b;
+  text-align: center;
+  padding: 14px 16px;
+  border: none;
+  outline:none;
+}
+
+.mainnavdiv-secondary li button:hover {
+  color: #1aaefd;
+}
+
+.mainnavdiv-secondary li .active {
+  color: #1aaefd;
+  border-bottom: 2px solid #1aaefd;
+}
+.navbar-light {
+  background-color:#099cec;
+}
+
+.dashboard-username {
+  color: white;
+  margin-right: 10px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  display: inline;
+}
+
+.dishword  {
+  position: relative;
+  top: 5px;
+  font-size: 26px;
+  color: white;
+}
+
+.orderword  {
+  position: relative;
+  font-weight: 300;
+  top: 5px;
+  font-size: 18px;
+  color: #e2e2e2;
+}
+.logo-picture {
+  padding:10px;
+  bottom: 0px;
+  position: relative;
+}
+
+.logo-span {
+  float:left;
+}
+.username-span-container {
+  float:right;
+}
+
+.userinfo-span{
+  position: relative;
+  top: 12px;
+  font-weight: 400;
+  font-size: 14px;
+  color: white;
+}
+
+.username-picture{
+  margin-left:20px;
+  position: relative;
+  top: 10px;
+}
+
+.my-last-order  {
+  margin:10px;
+  background-color: white;
+}
+
+.my-thead-class {
+  background-color: white;
+  color: #099cec;
+}
+
+th {
+  font-weight: 500;
+}
+
+.test {
+  height: 100%;
+}
+
+.mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #099cec;
+}
+@media screen and (max-width: 800px) {
+  .container-fuild {
+    height: 100%;
+  }
+  .container-fuild-dashboard {
+    min-height: 100vh;
+  }
 }

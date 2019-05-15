@@ -1,0 +1,60 @@
+.container-fuild-dashboard {
+  background-color: #efefef;
+  width: 100%;
+  height: 100%;
+}
+
+.main-body-loading {
+  height: 100%;
+  position: fixed;
+  top: calc( 50% - 25px );
+  left: calc( 50% - 25px );
+}
+
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  background-color: white;
+}
+
+#customers td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers th {
+  border-bottom: 2px solid silver;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+#customers tr {
+  font-size: 13px;
+}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: white;
+  color: rgb(36, 36, 36);
+}
+
+.table {
+  display:flex;
+  justify-content: center;
+  padding:10px;
+}
+
+#active {
+  color:rgb(23, 165, 23);
+}

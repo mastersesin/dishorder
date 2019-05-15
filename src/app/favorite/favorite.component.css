@@ -1,0 +1,13 @@
+.container-fuild-dashboard {
+  background-color: #efefef;
+  width: 100%;
+  height: 100%;
+}
+
+.main-body-loading {
+  height: 100%;
+  position: fixed;
+  top: calc( 50% - 25px );
+  left: calc( 50% - 25px );
+}
+

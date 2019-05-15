@@ -1,0 +1,49 @@
+<div class="container-fuild-dashboard">
+    <div class="main-body-loading" *ngIf="loading">
+      <mat-spinner [diameter]='50' ></mat-spinner>
+    </div>
+    <div class="main-body" *ngIf="!loading">
+      <!-- <div *ngFor="let item of data">
+        {{item.key}}
+      </div> -->
+      <div class="table">
+        <table id="customers">
+          <tr>
+            <th>Date</th>
+            <th>Supplier</th>
+            <th>Order ID</th>
+            <th>Total Amount</th>
+            <th>Sent on</th>
+          </tr>
+          <tr>
+            <td>Friday, Aprirl 21</td>
+            <td>HKT Restaurant</td>
+            <td>930232</td>
+            <td>1,648,902 VND</td>
+            <td id=active><i class="fas fa-share-square"></i> Send now ?</td>
+          </tr>
+          <tr>
+            <td>Friday, Aprirl 20</td>
+            <td>KFC Restaurant</td>
+            <td>930234</td>
+            <td>648,902 VND</td>
+            <td>Friday, Aprirl 19</td>
+          </tr>
+          <tr>
+            <td>Friday, Aprirl 19</td>
+            <td>HKT Restaurant</td>
+            <td>930232</td>
+            <td>1,648,902 VND</td>
+            <td>Friday, Aprirl 19</td>
+          </tr>
+          <tr>
+            <td>Friday, Aprirl 18</td>
+            <td>KFC Restaurant</td>
+            <td>930234</td>
+            <td>648,902 VND</td>
+            <td>Friday, Aprirl 18</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>

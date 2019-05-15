@@ -8,6 +8,9 @@ import { Observable } from 'rxjs';
 export class ApicallService {
   constructor( private httpClient: HttpClient ) { }
   getCurrentWeather(): Observable<any> {
-    return this.httpClient.get('http://127.0.0.1:5000/ldap')
+    return this.httpClient.get('http://127.0.0.1:5000/ldap');
+  }
+  getSuppliers(): Observable<any> {
+    return this.httpClient.get('http://127.0.0.1:5000/suppliers');
   }
 }

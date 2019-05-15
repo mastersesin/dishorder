@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ApicallService } from '../services/apicall/apicall.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dishorder',
@@ -14,14 +15,10 @@ export class DishorderComponent implements OnInit {
   apiMsg = 'Incorrect authentication credentials.';
   constructor(
     private router: Router,
-    private apicall: ApicallService,
   ) { }
 
   ngOnInit() {
-    this.apicall.getCurrentWeather().subscribe(data => {
-      console.log(data);
-    });
-   }
+  }
 
   registerAndAlreadyHaveAccountButton() {
     this.loading = true;
