@@ -1,0 +1,434 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 11.3
+-- Dumped by pg_dump version 11.3
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: customer_orders; Type: TABLE; Schema: public; Owner: mastersesin
+--
+
+CREATE TABLE public.customer_orders (
+    customer_order_id integer NOT NULL,
+    order_id integer DEFAULT 0 NOT NULL,
+    order_date text NOT NULL,
+    user_id integer NOT NULL,
+    on_behalf_of_customer text NOT NULL,
+    dish_id integer NOT NULL,
+    quantity integer DEFAULT 1 NOT NULL,
+    unit_price real NOT NULL,
+    currency text DEFAULT 'VND'::text NOT NULL,
+    personal_comment text,
+    created_date real DEFAULT 0 NOT NULL,
+    created_by integer NOT NULL,
+    review integer DEFAULT 0 NOT NULL,
+    review_comment text
+);
+
+
+ALTER TABLE public.customer_orders OWNER TO mastersesin;
+
+--
+-- Name: dish_tags; Type: TABLE; Schema: public; Owner: mastersesin
+--
+
+CREATE TABLE public.dish_tags (
+    dish_id integer NOT NULL,
+    tags_name text NOT NULL
+);
+
+
+ALTER TABLE public.dish_tags OWNER TO mastersesin;
+
+--
+-- Name: dishes; Type: TABLE; Schema: public; Owner: mastersesin
+--
+
+CREATE TABLE public.dishes (
+    dish_id integer NOT NULL,
+    supplier_code text NOT NULL,
+    dish_type_code text NOT NULL,
+    dish_code text NOT NULL,
+    dish_description text,
+    unit_price real NOT NULL,
+    currency text DEFAULT 'VND'::text NOT NULL,
+    review integer DEFAULT 0,
+    popularity integer DEFAULT 0,
+    created_date real DEFAULT 0 NOT NULL,
+    created_by integer DEFAULT 0 NOT NULL,
+    photo_thumbnail bytea,
+    photo_default_id integer DEFAULT 0 NOT NULL
+);
+
+
+ALTER TABLE public.dishes OWNER TO mastersesin;
+
+--
+-- Name: dishes_dish_id_seq; Type: SEQUENCE; Schema: public; Owner: mastersesin
+--
+
+CREATE SEQUENCE public.dishes_dish_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.dishes_dish_id_seq OWNER TO mastersesin;
+
+--
+-- Name: dishes_dish_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mastersesin
+--
+
+ALTER SEQUENCE public.dishes_dish_id_seq OWNED BY public.dishes.dish_id;
+
+
+--
+-- Name: orders_to_suppliers; Type: TABLE; Schema: public; Owner: mastersesin
+--
+
+CREATE TABLE public.orders_to_suppliers (
+    order_id integer NOT NULL,
+    supplier_code text NOT NULL,
+    order_date real NOT NULL,
+    delivery_address text NOT NULL,
+    total_amount real NOT NULL,
+    currency text DEFAULT 'VND'::text NOT NULL,
+    order_comment text,
+    created_date real DEFAULT 0 NOT NULL,
+    created_by integer NOT NULL,
+    sent_date real
+);
+
+
+ALTER TABLE public.orders_to_suppliers OWNER TO mastersesin;
+
+--
+-- Name: photos; Type: TABLE; Schema: public; Owner: mastersesin
+--
+
+CREATE TABLE public.photos (
+    photo_id integer NOT NULL,
+    photo_type text NOT NULL,
+    photo_type_id integer,
+    photo_path text
+);
+
+
+ALTER TABLE public.photos OWNER TO mastersesin;
+
+--
+-- Name: suppliers; Type: TABLE; Schema: public; Owner: mastersesin
+--
+
+CREATE TABLE public.suppliers (
+    supplier_code text NOT NULL,
+    supplier_name text NOT NULL,
+    email_address text NOT NULL,
+    phone_number text,
+    contact_name text,
+    photo_thumbnail bytea,
+    photo_default_id integer DEFAULT 0 NOT NULL,
+    order_time_deadline real NOT NULL,
+    minimum_order_quantity integer DEFAULT 1,
+    minimum_order_amount real DEFAULT 0,
+    currency text DEFAULT 'VND'::text NOT NULL,
+    review integer DEFAULT 0 NOT NULL,
+    popularity integer DEFAULT 0 NOT NULL
+);
+
+
+ALTER TABLE public.suppliers OWNER TO mastersesin;
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: mastersesin
+--
+
+CREATE TABLE public.users (
+    user_id integer NOT NULL,
+    email_address text,
+    password text,
+    first_name text NOT NULL,
+    family_name text,
+    photo_thumbnail bytea,
+    photo_default_id integer DEFAULT 0 NOT NULL,
+    creation_date real DEFAULT 0 NOT NULL,
+    last_connection_date real DEFAULT 0 NOT NULL,
+    profile integer DEFAULT 0
+);
+
+
+ALTER TABLE public.users OWNER TO mastersesin;
+
+--
+-- Name: users_user_id_seq; Type: SEQUENCE; Schema: public; Owner: mastersesin
+--
+
+CREATE SEQUENCE public.users_user_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_user_id_seq OWNER TO mastersesin;
+
+--
+-- Name: users_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mastersesin
+--
+
+ALTER SEQUENCE public.users_user_id_seq OWNED BY public.users.user_id;
+
+
+--
+-- Name: dishes dish_id; Type: DEFAULT; Schema: public; Owner: mastersesin
+--
+
+ALTER TABLE ONLY public.dishes ALTER COLUMN dish_id SET DEFAULT nextval('public.dishes_dish_id_seq'::regclass);
+
+
+--
+-- Name: users user_id; Type: DEFAULT; Schema: public; Owner: mastersesin
+--
+
+ALTER TABLE ONLY public.users ALTER COLUMN user_id SET DEFAULT nextval('public.users_user_id_seq'::regclass);
+
+
+--
+-- Data for Name: customer_orders; Type: TABLE DATA; Schema: public; Owner: mastersesin
+--
+
+COPY public.customer_orders (customer_order_id, order_id, order_date, user_id, on_behalf_of_customer, dish_id, quantity, unit_price, currency, personal_comment, created_date, created_by, review, review_comment) FROM stdin;
+\.
+
+
+--
+-- Data for Name: dish_tags; Type: TABLE DATA; Schema: public; Owner: mastersesin
+--
+
+COPY public.dish_tags (dish_id, tags_name) FROM stdin;
+\.
+
+
+--
+-- Data for Name: dishes; Type: TABLE DATA; Schema: public; Owner: mastersesin
+--
+
+COPY public.dishes (dish_id, supplier_code, dish_type_code, dish_code, dish_description, unit_price, currency, review, popularity, created_date, created_by, photo_thumbnail, photo_default_id) FROM stdin;
+2	TML	breakfast	Beef	\N	200000	VND	\N	\N	0	0	\\x4e6f6e65	1
+5	TML	Breakfast	Cheese Burger	\N	150000	VND	\N	\N	0	0	\\x4e6f6e65	1
+8	TML	Lunch	Beef with pork	\N	150000	VND	\N	\N	0	0	\\x4e6f6e65	1
+\.
+
+
+--
+-- Data for Name: orders_to_suppliers; Type: TABLE DATA; Schema: public; Owner: mastersesin
+--
+
+COPY public.orders_to_suppliers (order_id, supplier_code, order_date, delivery_address, total_amount, currency, order_comment, created_date, created_by, sent_date) FROM stdin;
+\.
+
+
+--
+-- Data for Name: photos; Type: TABLE DATA; Schema: public; Owner: mastersesin
+--
+
+COPY public.photos (photo_id, photo_type, photo_type_id, photo_path) FROM stdin;
+1	default	\N	\N
+\.
+
+
+--
+-- Data for Name: suppliers; Type: TABLE DATA; Schema: public; Owner: mastersesin
+--
+
+COPY public.suppliers (supplier_code, supplier_name, email_address, phone_number, contact_name, photo_thumbnail, photo_default_id, order_time_deadline, minimum_order_quantity, minimum_order_amount, currency, review, popularity) FROM stdin;
+TML	TML Restaurant	tml@gmail.com	\N	\N	\\x4e6f6e65	1	0	0	0	VND	0	0
+\.
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: mastersesin
+--
+
+COPY public.users (user_id, email_address, password, first_name, family_name, photo_thumbnail, photo_default_id, creation_date, last_connection_date, profile) FROM stdin;
+4	hihi@gmail.com	hihi	ty	\N	\N	1	0	0	0
+9	ty.tran@hoangyengroup.com	hihi	ty	\N	\\x	1	0	0	0
+15	trongty160995@gmail.com	19801980	Erik	\N	\\x	1	0	0	0
+\.
+
+
+--
+-- Name: dishes_dish_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mastersesin
+--
+
+SELECT pg_catalog.setval('public.dishes_dish_id_seq', 8, true);
+
+
+--
+-- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mastersesin
+--
+
+SELECT pg_catalog.setval('public.users_user_id_seq', 15, true);
+
+
+--
+-- Name: customer_orders customer_orders_pkey; Type: CONSTRAINT; Schema: public; Owner: mastersesin
+--
+
+ALTER TABLE ONLY public.customer_orders
+    ADD CONSTRAINT customer_orders_pkey PRIMARY KEY (customer_order_id);
+
+
+--
+-- Name: dish_tags dish_tags_pkey; Type: CONSTRAINT; Schema: public; Owner: mastersesin
+--
+
+ALTER TABLE ONLY public.dish_tags
+    ADD CONSTRAINT dish_tags_pkey PRIMARY KEY (dish_id, tags_name);
+
+
+--
+-- Name: dishes dishes_dish_code_key; Type: CONSTRAINT; Schema: public; Owner: mastersesin
+--
+
+ALTER TABLE ONLY public.dishes
+    ADD CONSTRAINT dishes_dish_code_key UNIQUE (dish_code);
+
+
+--
+-- Name: dishes dishes_dish_type_code_key; Type: CONSTRAINT; Schema: public; Owner: mastersesin
+--
+
+ALTER TABLE ONLY public.dishes
+    ADD CONSTRAINT dishes_dish_type_code_key UNIQUE (dish_type_code);
+
+
+--
+-- Name: dishes dishes_pkey; Type: CONSTRAINT; Schema: public; Owner: mastersesin
+--
+
+ALTER TABLE ONLY public.dishes
+    ADD CONSTRAINT dishes_pkey PRIMARY KEY (dish_id);
+
+
+--
+-- Name: orders_to_suppliers orders_to_suppliers_pkey; Type: CONSTRAINT; Schema: public; Owner: mastersesin
+--
+
+ALTER TABLE ONLY public.orders_to_suppliers
+    ADD CONSTRAINT orders_to_suppliers_pkey PRIMARY KEY (order_id);
+
+
+--
+-- Name: photos photos_pkey; Type: CONSTRAINT; Schema: public; Owner: mastersesin
+--
+
+ALTER TABLE ONLY public.photos
+    ADD CONSTRAINT photos_pkey PRIMARY KEY (photo_id);
+
+
+--
+-- Name: suppliers suppliers_email_address_key; Type: CONSTRAINT; Schema: public; Owner: mastersesin
+--
+
+ALTER TABLE ONLY public.suppliers
+    ADD CONSTRAINT suppliers_email_address_key UNIQUE (email_address);
+
+
+--
+-- Name: suppliers suppliers_pkey; Type: CONSTRAINT; Schema: public; Owner: mastersesin
+--
+
+ALTER TABLE ONLY public.suppliers
+    ADD CONSTRAINT suppliers_pkey PRIMARY KEY (supplier_code);
+
+
+--
+-- Name: users users_email_address_key; Type: CONSTRAINT; Schema: public; Owner: mastersesin
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_email_address_key UNIQUE (email_address);
+
+
+--
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: mastersesin
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (user_id);
+
+
+--
+-- Name: customer_orders customer_orders_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mastersesin
+--
+
+ALTER TABLE ONLY public.customer_orders
+    ADD CONSTRAINT customer_orders_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(user_id);
+
+
+--
+-- Name: dishes dishes_photo_default_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mastersesin
+--
+
+ALTER TABLE ONLY public.dishes
+    ADD CONSTRAINT dishes_photo_default_id_fkey FOREIGN KEY (photo_default_id) REFERENCES public.photos(photo_id);
+
+
+--
+-- Name: dishes dishes_supplier_code_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mastersesin
+--
+
+ALTER TABLE ONLY public.dishes
+    ADD CONSTRAINT dishes_supplier_code_fkey FOREIGN KEY (supplier_code) REFERENCES public.suppliers(supplier_code);
+
+
+--
+-- Name: orders_to_suppliers orders_to_suppliers_supplier_code_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mastersesin
+--
+
+ALTER TABLE ONLY public.orders_to_suppliers
+    ADD CONSTRAINT orders_to_suppliers_supplier_code_fkey FOREIGN KEY (supplier_code) REFERENCES public.suppliers(supplier_code);
+
+
+--
+-- Name: suppliers suppliers_photo_default_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mastersesin
+--
+
+ALTER TABLE ONLY public.suppliers
+    ADD CONSTRAINT suppliers_photo_default_id_fkey FOREIGN KEY (photo_default_id) REFERENCES public.photos(photo_id);
+
+
+--
+-- Name: users users_photo_default_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mastersesin
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_photo_default_id_fkey FOREIGN KEY (photo_default_id) REFERENCES public.photos(photo_id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
