@@ -20,6 +20,14 @@
             <p style="color: silver">New supplier</p>
           </div>
         </div>
+        <div class="chart-wrapper">
+          <div class="chart-left-side">
+            <google-chart style="width: 100%;min-height: 300px;" [columnNames]="orderAmountColumnName" [data]="supplierOrderAmount" [type]="myType" [options]="myOptions" [dynamicResize]="dynamicResize"></google-chart>
+          </div>
+          <div class="chart-right-side">
+            <google-chart style="width: 100%;min-height: 300px;" [columnNames]="totalOrderColumnName" [data]="supplierDishes" [type]="myType" [options]="myOptions" [dynamicResize]="dynamicResize"></google-chart>
+          </div>
+        </div>
       </div>
     </div>
   </div>

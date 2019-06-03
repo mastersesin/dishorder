@@ -7,15 +7,18 @@ import { DishorderComponent } from './dishorder/dishorder.component';
 import { RegisterComponent } from './register/register.component';
 import { ApicallService } from './services/apicall/apicall.service';
 import { HttpClientModule } from '@angular/common/http';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent, DashboardDialogComponent } from './dashboard/dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FavoriteComponent } from './favorite/favorite.component';
-import { OrdersComponent } from './orders/orders.component';
+import { OrdersComponent, OrdersDialogComponent } from './orders/orders.component';
 import { SuppliersComponent } from './suppliers/suppliers.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DemoMaterialModule } from './material.module';
 import { MatButtonModule, MatFormFieldModule, MatInputModule, MatRippleModule } from '@angular/material';
+import { FormsModule } from '@angular/forms';
+import { MenuofdishesComponent, MenuofdishesDialogComponent } from './menuofdishes/menuofdishes.component';
+import { GoogleChartsModule } from 'angular-google-charts';
 
 
 @NgModule({
@@ -27,6 +30,10 @@ import { MatButtonModule, MatFormFieldModule, MatInputModule, MatRippleModule } 
     FavoriteComponent,
     OrdersComponent,
     SuppliersComponent,
+    DashboardDialogComponent,
+    MenuofdishesComponent,
+    MenuofdishesDialogComponent,
+    OrdersDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +47,11 @@ import { MatButtonModule, MatFormFieldModule, MatInputModule, MatRippleModule } 
     MatFormFieldModule,
     MatInputModule,
     MatRippleModule,
+    FormsModule,
+    GoogleChartsModule
   ],
+  entryComponents: [DashboardComponent, DashboardDialogComponent, MenuofdishesComponent,
+    MenuofdishesDialogComponent, OrdersComponent, OrdersDialogComponent],
   providers: [ApicallService],
   bootstrap: [AppComponent],
 })

@@ -36,3 +36,19 @@
 .main-body {
   font-size: 14px;
 }
+
+.chart-wrapper {
+  display: flex;
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+.chart-left-side {
+  width: 50%;
+  padding: 10px;
+}
+
+.chart-right-side {
+  width: 50%;
+  padding: 10px;
+}

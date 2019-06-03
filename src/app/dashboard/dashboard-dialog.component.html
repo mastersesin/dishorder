@@ -1,0 +1,69 @@
+<!-- <h1 mat-dialog-title><p>Pick dish for May, {{data.orderDay}}</p></h1>
+<div mat-dialog-content>
+  <div style='max-height: 400px'>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Search your food" value="Sushi">
+    </mat-form-field>
+    <mat-selection-list style='width: 400px;' #shoes>
+      <mat-list-option style="height:100px;" *ngFor="let shoe of data.typesOfShoes" [value]='shoe'>
+        <div class="favoritecontent">
+          <img height=70  px src="../../assets/burger.jpg">
+          <ul>
+            <li class="first"><span>Burger Cheese Big Size</span></li>
+            <li class="second"><span>HKT Restaurant</span></li>
+            <li class="third"><span>Orders : 290 times</span></li>
+          </ul>
+        </div> -->
+        <!-- <img height='80px' width='80px' src='../../assets/vegan-nacho-pizza-photo.jpg'>{{shoe}} -->
+      <!-- </mat-list-option>
+    </mat-selection-list>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button id="savebutton" mat-button (click)="onSave(shoes)" cdkFocusInitial>Save</button>
+</div> -->
+
+
+<!-- Copyright 2019 Google Inc. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->
+
+<div class="flex-container">
+  <article class="flex" id="left-side">
+    <h1 mat-dialog-title><p>Pick dish for May, {{data.orderDay}}</p></h1>
+    <div mat-dialog-content>
+      <div style='max-height: 400px'>
+        <mat-form-field class="search-field">
+          <input (keyup)="onKeyUp($event)" matInput [(ngModel)]="myTextarea" placeholder="Search your food" type="foodsearch">
+        </mat-form-field>
+        <mat-selection-list style='width: 400px;min-height: 330px;' #shoes>
+          <mat-list-option style="height:100px;" *ngFor="let dish of dishescom" [value]='dish'>
+            <div (click)="test(data.orderDay, dish)" class="favoritecontent">
+              <img height=70  px src="../../assets/burger.jpg">
+              <ul>
+                <li class="first"><span>{{dish.value.dish_code}}</span></li>
+                <li class="second"><span>{{dish.value.supplier_code}}</span></li>
+                <li class="third"><span>Orders : {{dish.value.popularity}} times</span></li>
+              </ul>
+            </div>
+          </mat-list-option>
+        </mat-selection-list>
+      </div>
+      <button mat-button (click)="openDialogCreateDish()">Not in the list ?</button>
+    </div>
+  </article>
+  <article class="flex" id="right-side">
+    <h3>Your Order</h3>
+    <div style='min-height: 400px'>
+      <div *ngFor="let item of dishuserchoose | keyvalue">
+        <p> {{item.value.value.dish_code}}</p>
+        <button mat-button (click)="addMore(item.key)">+</button>
+      </div>
+    </div>
+    <div mat-dialog-actions style='display:flex;justify-content: center;'>
+      <button mat-button (click)="onNoClick()">No Thanks</button>
+      <button id="savebutton" mat-button (click)="onSave(shoes)" cdkFocusInitial>Save</button>
+    </div>
+  </article>
+</div>

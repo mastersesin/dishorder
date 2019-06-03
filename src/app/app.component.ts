@@ -9,16 +9,20 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   title = 'local-weather-app';
+  logedinstate = 'true';
   constructor(
     private router: Router,
   ) { }
   ngOnInit() {
     // This need to edit when path is longer than now
     // Active current in path button
-    const currentPath = window.location.pathname;
-    const needActivate = document.getElementById(currentPath.substr(1));
-    needActivate.classList.add('active');
+    setTimeout(() => {
+      const currentPath = window.location.pathname;
+      const needActivate = document.getElementById(currentPath.substr(1));
+      needActivate.classList.add('active');
+    });
   }
+
   onClickNavTabs(id) {
     console.log(id);
     const elementCurrentActive = document.getElementsByClassName('active')[0];

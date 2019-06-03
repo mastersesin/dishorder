@@ -1,8 +1,8 @@
 <div class="container-fuild-dashboard">
-  <div class="main-body-loading" *ngIf="loading">
+  <div class="main-body-loading" *ngIf="isLoading">
     <mat-spinner [diameter]='50' ></mat-spinner>
   </div>
-  <div class="main-body" *ngIf="!loading">
+  <div class="main-body" *ngIf="!isLoading">
     <div class="calendarwrapper" id="big">
       <div class="orderday">
         Mo
@@ -26,8 +26,11 @@
         Su
       </div>
       <div class="oderdaywrapper">
-        <div class="orderdaynumber" *ngFor="let item of data">
-          <button class="orderdaybutton">{{item.key}}</button>
+        <div class="orderdaynumber" *ngFor="let item of previousMonth">
+          <button class="orderdaybutton" disabled="disabled">{{item.value}}</button>
+        </div>
+        <div class="orderdaynumber" *ngFor="let item of thisMonth">
+          <button (click)="openDialog(item.key)" class="orderdaybutton">{{item.value}}</button>
         </div>
       </div>
     </div>

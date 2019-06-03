@@ -1,0 +1,36 @@
+<div>
+  <h3>Order Details</h3>
+  <div class='detail-table'>
+    <div class="table">
+      <div>
+        <table id="customers">
+          <tr>
+            <th>Cus Name</th>
+            <th>Supplier</th>
+            <th>Dish Code</th>
+            <th>Amount</th>
+            <th>Quantity</th>
+          </tr>
+          <tr>
+            <td>Mr - Dupire</td>
+            <td>TML Restaurant</td>
+            <td>Cheese Burgur Big Size</td>
+            <td>120,000 VND</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>Mr - Dupire</td>
+            <td>TML Restaurant</td>
+            <td>Beef Steak</td>
+            <td>180,000 VND</td>
+            <td>1</td>
+          </tr>
+        </table>
+      </div>
+      <div style='text-align: right;padding:10px;'><p>Total Order Amount: 300,000 VND</p></div>
+    </div>
+    <div style='width:100%'>
+      <button (click)='sendOrder()' style='float: right;' id="savebutton" mat-button>Send</button>
+    </div>
+  </div>
+</div>

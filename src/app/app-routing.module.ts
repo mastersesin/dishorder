@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { OrdersComponent } from './orders/orders.component';
 import { SuppliersComponent } from './suppliers/suppliers.component';
+import { MenuofdishesComponent } from './menuofdishes/menuofdishes.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'suppliers',
     component: SuppliersComponent
+  },
+  {
+    path: 'dishes',
+    component: MenuofdishesComponent
   }
 ];
 

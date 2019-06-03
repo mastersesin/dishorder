@@ -10,6 +10,23 @@ import { ApicallService } from '../services/apicall/apicall.service';
 export class SuppliersComponent implements OnInit {
   loading = true;
   data = [];
+  supplierOrderAmount = [
+    ['TML', 8136000],
+    ['HKT', 8538000],
+  ];
+  supplierDishes = [
+    ['Beef', 10],
+    ['Beefsteak', 8],
+    ['Noodle', 5],
+    ['Grill Pork', 4]
+  ];
+  myType = 'ColumnChart';
+  myOptions = {
+    //
+  };
+  orderAmountColumnName = ['Supplier', 'Total Amount'];
+;  totalOrderColumnName = ['Order', 'Order'];
+  dynamicResize = true;
   constructor(private apicall: ApicallService) { }
 
   ngOnInit() {

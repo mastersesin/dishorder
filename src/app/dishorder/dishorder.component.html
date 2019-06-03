@@ -19,14 +19,14 @@
       <div class="form-login-wrapper">
         <div class="wrapper-form-login-main">
           <div class="form-login-main">
-            <input placeholder="Email" type="text" style="padding: 0px; position: relative; width: 100%; border: none; outline: none; background-color: rgba(0, 0, 0, 0); color: rgb(112, 120, 125); cursor: initial; font: inherit; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); height: 100%;">
+            <input [(ngModel)]="useremail_input" placeholder="Email" type="text" style="padding: 0px; position: relative; width: 100%; border: none; outline: none; background-color: rgba(0, 0, 0, 0); color: rgb(112, 120, 125); cursor: initial; font: inherit; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); height: 100%;">
           </div>
         </div>
         <div class="form-login-main">
-          <input placeholder="Password" type="password" style="padding: 0px; position: relative; width: 100%; border: none; outline: none; background-color: rgba(0, 0, 0, 0); color: rgb(112, 120, 125); cursor: initial; font: inherit; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); height: 100%;">
+          <input (keydown)="onKeydown($event)" [(ngModel)]="userpassword_input" placeholder="Password" type="password" style="padding: 0px; position: relative; width: 100%; border: none; outline: none; background-color: rgba(0, 0, 0, 0); color: rgb(112, 120, 125); cursor: initial; font: inherit; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); height: 100%;">
         </div>
-        <div class="form-login-button">
-          <button type="submit" class="btn btn-primary">Sign In</button>
+        <div class="form-login-button"  >
+          <button (click)="signin()" type="submit" class="btn btn-primary">Sign In</button>
         </div>
       </div>
       <div class="more-info">

@@ -62,8 +62,6 @@
   vertical-align: top;
   background-color: white;
   font-size:12px;
-  padding: 5px;
-  border-bottom :0.1px solid rgb(145, 144, 144);
   text-align: center;
 }
 .oderdaywrapper {
@@ -169,15 +167,15 @@ li {
     vertical-align: top;
     background-color: aqua;
     font-size:14px;
-    padding: 5px;
-    border :1px solid white;
+    /* border :1px solid white; */
     text-align: center;
   }
 }
 .orderdaybutton {
+  padding: 0;
   width: 100%;
   height: 100%;
-  background-color: white; /* Green */
+  /* background-color: red; Green */
   border: none;
   color: black;
   text-align: center;
@@ -186,14 +184,47 @@ li {
   font-size: 16px;
   border: none;
   outline: none;
+  border-bottom :0.1px solid rgb(145, 144, 144);
 }
 
 .orderdaynumber:hover {
-  -webkit-transform: scale(1.2);
-  -ms-transform: scale(1.2);
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
   transition-duration: 0.2s;
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
+.mat-button#savebutton{
+  justify-content: center;
+  background-color: #4286f4;
+  color: white;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  min-height: 100%;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.flex#left-side {
+  width: 50%;
+  height: 100%;
+}
+
+.flex#right-side {
+  width: 50%;
+  height: 100%;
+}
+
+.search-field {
+  width: 100%;
+}
 /* Calendar */
 

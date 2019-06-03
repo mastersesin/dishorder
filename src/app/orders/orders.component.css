@@ -50,11 +50,22 @@
 }
 
 .table {
-  display:flex;
+  display:relative;
   justify-content: center;
   padding:10px;
 }
 
 #active {
   color:rgb(23, 165, 23);
+}
+
+#savebutton {
+  justify-content: center;
+  background-color: #4286f4;
+  color: white;
+}
+
+.table {
+  min-height: 450px;
+  overflow:scroll;
 }
