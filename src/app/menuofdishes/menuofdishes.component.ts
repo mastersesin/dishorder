@@ -14,7 +14,11 @@ export class MenuofdishesDialogComponent implements OnInit {
   constructor(
     private apicall: ApicallService,
     public dialogRef: MatDialogRef<MenuofdishesDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) {}
+  defaultValue = 'VND';
+
+
   ngOnInit() {
 
   }

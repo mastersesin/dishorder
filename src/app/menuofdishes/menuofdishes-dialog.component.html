@@ -2,27 +2,27 @@
   <h3>Create dishes</h3>
   <div class='create-dish-form'>
     <mat-form-field style="width: 100%;">
-      <mat-select placeholder="Select Supplier">
+      <mat-select matNativeControl required placeholder="Select Supplier">
         <mat-option value="TML">TML Restaurant</mat-option>
         <mat-option value="HKT">HKT Restaurant</mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field style="width:100%;">
-      <input matInput placeholder="Dish type code">
+    <mat-form-field  style="width:100%;">
+      <input matInput placeholder="Dish type" required>
     </mat-form-field>
-    <mat-form-field style="width:100%;">
-      <input matInput placeholder="Dish code">
+    <mat-form-field  style="width:100%;">
+      <input matInput placeholder="Dish name" required>
     </mat-form-field>
-    <mat-form-field style="width:100%;">
-      <input matInput placeholder="Dish description">
+    <mat-form-field  style="width:100%;">
+      <input matInput placeholder="Dish description" required>
     </mat-form-field>
     <mat-form-field style="width:50%;">
-      <input matInput placeholder="Price">
+      <input matInput placeholder="Price" required>
     </mat-form-field>
     <mat-form-field style="width: 50%;">
-      <mat-select placeholder="Currency">
-        <mat-option value="TML">VND</mat-option>
-        <mat-option value="HKT">USD</mat-option>
+      <mat-select [(value)]='defaultValue' placeholder="Currency">
+        <mat-option value="VND">VND</mat-option>
+        <mat-option value="USD">USD</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field style="width: 100%;">

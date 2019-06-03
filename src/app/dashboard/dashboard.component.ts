@@ -36,6 +36,10 @@ export class DashboardDialogComponent  implements OnInit {
     });
   }
 
+  change() {
+    console.log('changed');
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
   }
@@ -56,6 +60,13 @@ export class DashboardDialogComponent  implements OnInit {
   addMore(dish_code) {
     this.dishuserchoose[dish_code]['quantity']++;
     console.log(this.dishuserchoose[dish_code]['quantity']);
+  }
+
+  removeAdded(dish_code) {
+    if (this.dishuserchoose[dish_code]['quantity'] > 1) {
+      this.dishuserchoose[dish_code]['quantity']--;
+      console.log(this.dishuserchoose[dish_code]['quantity']);
+    }
   }
 
   openDialogCreateDish() {

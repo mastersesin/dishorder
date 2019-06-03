@@ -38,8 +38,8 @@
           <input (keyup)="onKeyUp($event)" matInput [(ngModel)]="myTextarea" placeholder="Search your food" type="foodsearch">
         </mat-form-field>
         <mat-selection-list style='width: 400px;min-height: 330px;' #shoes>
-          <mat-list-option style="height:100px;" *ngFor="let dish of dishescom" [value]='dish'>
-            <div (click)="test(data.orderDay, dish)" class="favoritecontent">
+          <mat-list-option style="height:100px;" (click)="test(data.orderDay, dish)" *ngFor="let dish of dishescom" [value]='dish'>
+            <div class="favoritecontent">
               <img height=70  px src="../../assets/burger.jpg">
               <ul>
                 <li class="first"><span>{{dish.value.dish_code}}</span></li>
@@ -56,9 +56,21 @@
   <article class="flex" id="right-side">
     <h3>Your Order</h3>
     <div style='min-height: 400px'>
-      <div *ngFor="let item of dishuserchoose | keyvalue">
-        <p> {{item.value.value.dish_code}}</p>
-        <button mat-button (click)="addMore(item.key)">+</button>
+      <div *ngFor="let dish of dishuserchoose | keyvalue">
+          <div class="favoritecontent">
+            <img height=70  px src="../../assets/burger.jpg">
+            <ul>
+              <li class="first"><span>{{dish.value.value.dish_code}}</span></li>
+              <li class="third"><span>Quantity <img src='../../assets/decrease.svg' (click)="removeAdded(dish.key)">{{dish.value.quantity}}<img src='../../assets/increase.svg' (click)="addMore(dish.key)"></span></li>
+              <li class="second">
+                <span>
+                    <mat-form-field style="width:100%;">
+                      <input matInput placeholder="Order for" value="Yourself">
+                    </mat-form-field>
+                </span>
+              </li>
+            </ul>
+          </div>
       </div>
     </div>
     <div mat-dialog-actions style='display:flex;justify-content: center;'>

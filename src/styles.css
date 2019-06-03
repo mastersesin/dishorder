@@ -11,3 +11,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-pseudo-checkbox.mat-pseudo-checkbox-checked {
   background: #4286f4;
 }
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* make scrollbar transparent */
+}
