@@ -65,7 +65,7 @@
               <li class="second">
                 <span>
                     <mat-form-field style="width:100%;">
-                      <input matInput placeholder="Order for" value="Yourself">
+                      <input matInput placeholder="Order for" [(ngModel)]="dish.value.onbehalf">
                     </mat-form-field>
                 </span>
               </li>
@@ -73,7 +73,7 @@
           </div>
       </div>
     </div>
-    <div mat-dialog-actions style='display:flex;justify-content: center;'>
+    <div mat-dialog-actions style='display:flex;justify-content: flex-end;'>
       <button mat-button (click)="onNoClick()">No Thanks</button>
       <button id="savebutton" mat-button (click)="onSave(shoes)" cdkFocusInitial>Save</button>
     </div>

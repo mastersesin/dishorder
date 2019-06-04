@@ -42,7 +42,7 @@ export class MenuofdishesComponent implements OnInit {
   openDialog() {
     const dialogRef = this.dialog.open(MenuofdishesDialogComponent, {
       width: '500px',
-      height: '600px',
+      height: '550px',
       data: {}
     });
 

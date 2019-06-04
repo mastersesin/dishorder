@@ -50,6 +50,7 @@ export class DashboardDialogComponent  implements OnInit {
     if (!(dish.key in this.dishuserchoose)) {
       this.dishuserchoose[dish.key] = dish;
       this.dishuserchoose[dish.key]['quantity'] = 1;
+      this.dishuserchoose[dish.key]['onbehalf'] = 'Yourself';
     }
     else {
       delete this.dishuserchoose[dish.key];
@@ -73,7 +74,7 @@ export class DashboardDialogComponent  implements OnInit {
     this.dialogRef.close();
     const dialogRef = this.dialog.open(MenuofdishesDialogComponent, {
       width: '500px',
-      height: '600px',
+      height: '550px',
       data: {}
     });
 

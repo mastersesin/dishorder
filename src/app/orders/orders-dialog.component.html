@@ -6,31 +6,37 @@
         <table id="customers">
           <tr>
             <th>Cus Name</th>
-            <th>Supplier</th>
-            <th>Dish Code</th>
-            <th>Amount</th>
+            <th>On Behalf</th>
+            <th>Dish Name</th>
             <th>Quantity</th>
+            <th>Unit Amount</th>
+            <th>Total Amount</th>
+            <th></th>
           </tr>
           <tr>
             <td>Mr - Dupire</td>
-            <td>TML Restaurant</td>
+            <td>None</td>
             <td>Cheese Burgur Big Size</td>
-            <td>120,000 VND</td>
             <td>1</td>
+            <td>120,000 VND</td>
+            <td>120,000 VND</td>
+            <td><img src="../../assets/delete.svg"></td>
           </tr>
           <tr>
             <td>Mr - Dupire</td>
-            <td>TML Restaurant</td>
-            <td>Beef Steak</td>
-            <td>180,000 VND</td>
+            <td>None</td>
+            <td>Cheese Burgur Big Size</td>
             <td>1</td>
+            <td>120,000 VND</td>
+            <td>120,000 VND</td>
+            <td><img src="../../assets/delete.svg"></td>
           </tr>
         </table>
       </div>
-      <div style='text-align: right;padding:10px;'><p>Total Order Amount: 300,000 VND</p></div>
     </div>
     <div style='width:100%'>
-      <button (click)='sendOrder()' style='float: right;' id="savebutton" mat-button>Send</button>
+      <span><button (click)='openDialog()' mat-button>Create new order</button></span>
+      <span style='float: right;'><button cdkFocusInitial (click)='sendOrder()' id="savebutton" mat-button>Send</button></span>
     </div>
   </div>
 </div>

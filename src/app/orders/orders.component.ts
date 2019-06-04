@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ApicallService } from '../services/apicall/apicall.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatInputModule } from '@angular/material';
+import { DashboardDialogComponent } from '../dashboard/dashboard.component';
 
 export interface DialogData {
 }
@@ -12,6 +13,7 @@ export interface DialogData {
 export class OrdersDialogComponent implements OnInit {
   constructor(
     private apicall: ApicallService,
+    public dialog: MatDialog,
     public dialogRef: MatDialogRef<OrdersDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
   ngOnInit() {
@@ -19,6 +21,19 @@ export class OrdersDialogComponent implements OnInit {
   }
   sendOrder() {
     this.dialogRef.close();
+  }
+
+  openDialog() {
+    this.dialogRef.close();
+    const dialogRef = this.dialog.open(DashboardDialogComponent, {
+      width: '1000px',
+      height: '600px',
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 }
 

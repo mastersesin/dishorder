@@ -53,7 +53,7 @@
 }
 
 .mat-button#savebutton{
-  justify-content: center;
+  float: right;
   background-color: #4286f4;
   color: white;
 }
