@@ -11,6 +11,9 @@ export interface DialogData {
   styleUrls: ['./menuofdishes.component.css']
 })
 export class MenuofdishesDialogComponent implements OnInit {
+  public imagePath;
+  imgURL: any;
+  public message: string;
   constructor(
     private apicall: ApicallService,
     public dialogRef: MatDialogRef<MenuofdishesDialogComponent>,
@@ -21,6 +24,29 @@ export class MenuofdishesDialogComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+  preview(files) {
+    var mimeType = files[0].type;
+    var reader = new FileReader();
+    if (files.length === 0){
+      return;
+    }
+    if (mimeType.match(/image\/*/) == null) {
+      this.message = 'Only images are supported.';
+      return;
+    }
+    this.imagePath = files;
+    reader.readAsDataURL(files[0]);
+    reader.onload = (_event) => {
+      this.imgURL = reader.result;
+    };
+  }
+
+  save() {
+    console.log(this.imagePath);
+    this.apicall.postImage(this.imagePath).subscribe(data => {
+      console.log(data);
+    });
   }
 }
 
@@ -42,7 +68,7 @@ export class MenuofdishesComponent implements OnInit {
   openDialog() {
     const dialogRef = this.dialog.open(MenuofdishesDialogComponent, {
       width: '500px',
-      height: '550px',
+      height: '680px',
       data: {}
     });
 

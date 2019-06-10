@@ -16,23 +16,10 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     // This need to edit when path is longer than now
     // Active current in path button
-    setTimeout(() => {
-      const currentPath = window.location.pathname;
-      const needActivate = document.getElementById(currentPath.substr(1));
-      needActivate.classList.add('active');
-    });
-  }
-
-  onClickNavTabs(id) {
-    console.log(id);
-    const elementCurrentActive = document.getElementsByClassName('active')[0];
-    try {
-      elementCurrentActive.className = '';
-    } catch (err) {
-      console.log('hihi');
-    }
-    const elementActive = document.getElementById(id);
-    elementActive.classList.add('active');
-    this.router.navigate((['/' + id]));
+    // setTimeout(() => {
+    //   const currentPath = window.location.pathname;
+    //   const needActivate = document.getElementById(currentPath.substr(1));
+    //   needActivate.classList.add('active');
+    // });
   }
 }

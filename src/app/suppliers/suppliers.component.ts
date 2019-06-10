@@ -1,5 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ApicallService } from '../services/apicall/apicall.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatInputModule } from '@angular/material';
+export interface DialogData {
+}
+@Component({
+  selector: 'app-suppliers-dialog',
+  templateUrl: './suppliers-dialog.component.html',
+  styleUrls: ['./suppliers.component.css']
+})
+export class SuppliersDialogComponent implements OnInit {
+  defaultValue = 'VND';
+  defaultAM = 'AM';
+  constructor(
+    private apicall: ApicallService,
+    public dialogRef: MatDialogRef<SuppliersDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) {}
+
+  ngOnInit() {
+
+  }
+}
 
 @Component({
   selector: 'app-suppliers',
@@ -27,7 +48,10 @@ export class SuppliersComponent implements OnInit {
   orderAmountColumnName = ['Supplier', 'Total Amount'];
 ;  totalOrderColumnName = ['Order', 'Order'];
   dynamicResize = true;
-  constructor(private apicall: ApicallService) { }
+  constructor(
+    private apicall: ApicallService,
+    public dialog: MatDialog,
+    ) { }
 
   ngOnInit() {
     this.apicall.getSuppliers().subscribe(data => {
@@ -39,4 +63,15 @@ export class SuppliersComponent implements OnInit {
     });
   }
 
+  openDialog() {
+    const dialogRef = this.dialog.open(SuppliersDialogComponent, {
+      width: '500px',
+      height: '750px',
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
 }

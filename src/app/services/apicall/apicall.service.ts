@@ -8,23 +8,39 @@ import { Observable } from 'rxjs';
 export class ApicallService {
   constructor( private httpClient: HttpClient ) { }
   getCurrentWeather(): Observable<any> {
-    return this.httpClient.get('http://127.0.0.1:3000/ldap');
+    return this.httpClient.get('http://172.16.46.157:5000/products');
   }
   getSuppliers(): Observable<any> {
-    return this.httpClient.get('http://127.0.0.1:3000/suppliers');
+    return this.httpClient.get('http://172.16.46.157:5000/suppliers');
   }
   postLoginInfo(email, password): Observable<any> {
     var header = new HttpHeaders();
     header = header.append('Content-Type', 'application/json');
-    return this.httpClient.post('http://127.0.0.1:3000/login', {'email': email, 'password': password});
+    return this.httpClient.post('http://172.16.46.157:5000/login', {'email': email, 'password': password});
+  }
+  postRegisterInfo(email, password, finame, faname): Observable<any> {
+    var header = new HttpHeaders();
+    header = header.append('Content-Type', 'application/json');
+    return this.httpClient.post('http://172.16.46.157:5000/register', {
+        'email_address': email,
+        'password': password,
+        'first_name': finame,
+        'family_name': faname
+      }
+    );
   }
   getDishes(querystring): Observable<any> {
     if (querystring !== ''){
       var params = new HttpParams;
       params = params.append('querystring', querystring);
-      return this.httpClient.get('http://127.0.0.1:3000/dishes', { params: params });
+      return this.httpClient.get('http://172.16.46.157:5000/dishes', { params: params });
     } else {
-      return this.httpClient.get('http://127.0.0.1:3000/dishes');
+      return this.httpClient.get('http://172.16.46.157:5000/dishes');
     }
+  }
+  postImage(files): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('file', files[0], files[0].name);
+    return this.httpClient.post('http://172.16.46.157:5000' + '/upload', formData);
   }
 }

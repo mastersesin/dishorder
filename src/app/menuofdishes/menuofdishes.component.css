@@ -1,4 +1,8 @@
+.container-fuild-dashboard {
+  padding:0 40px 0 40px;
+}
 .dishescontainer {
+  margin-top: 20px;
   padding: 10px;
 }
 
@@ -6,8 +10,7 @@
   margin: 10px;
   display: inline-block;
   height: 200px;
-  width: 10%;
-  min-width: 150px;
+  width: 200px;
   background-color: white;
   cursor: pointer;
 }
@@ -53,7 +56,30 @@
 }
 
 .mat-button#savebutton{
+  margin-top: 0px;
   float: right;
   background-color: #4286f4;
   color: white;
+}
+
+.input-image {
+  display: flex;
+}
+
+.filtering-options {
+  padding:30px 10px 15px 10px;
+  border-bottom :0.5px solid rgb(190, 190, 190);
+}
+
+.filtering-options .filter-button {
+  display: inline;
+  height: 70px;
+  margin-right: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgb(102, 102, 102);
+}
+
+.filter-button :hover {
+  cursor: pointer;
 }

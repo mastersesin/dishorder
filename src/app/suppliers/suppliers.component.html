@@ -1,3 +1,4 @@
+<app-headernavbar></app-headernavbar>
 <div class="container-fuild-dashboard">
     <div class="main-body-loading" *ngIf="loading">
       <mat-spinner [diameter]='50' ></mat-spinner>
@@ -12,7 +13,7 @@
             <p>{{item.value}}</p>
           </div>
         </div>
-        <div class="suppliersdiv">
+        <div (click)="openDialog()" class="suppliersdiv">
           <div style="padding: 20px">
             <img height=150px; src="../../assets/button_new.png">
           </div>

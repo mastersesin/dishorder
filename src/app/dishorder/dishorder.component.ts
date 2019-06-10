@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ApicallService } from '../services/apicall/apicall.service';
-import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dishorder',
@@ -21,6 +20,7 @@ export class DishorderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.apicall.getCurrentWeather().subscribe(data => {console.log(data)})
     const loginstatus = localStorage.getItem('isLogedIn');
     if (loginstatus === 'true') {
       console.log('routebyoninit');

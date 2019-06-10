@@ -1,3 +1,4 @@
+<app-headernavbar></app-headernavbar>
 <div class="container-fuild-dashboard">
   <div class="main-body-loading" *ngIf="isLoading">
     <mat-spinner [diameter]='50' ></mat-spinner>
@@ -26,10 +27,11 @@
         Su
       </div>
       <div class="oderdaywrapper">
-        <div class="orderdaynumber" *ngFor="let item of previousMonth">
+        <div class="orderdaynumber-disable" *ngFor="let item of previousMonth">
           <button class="orderdaybutton" disabled="disabled">{{item.value}}</button>
         </div>
         <div class="orderdaynumber" *ngFor="let item of thisMonth">
+          <div class="topright" style='font-size: 8px;'><img src='../../assets/success.png' height=18px></div>
           <button (click)="openDialog(item.key)" class="orderdaybutton">{{item.value}}</button>
         </div>
       </div>
@@ -39,7 +41,7 @@
         <p><i class="fas fa-star"></i> Your Favorite<p>
       </div>
       <div class="favoritefoodshowcontainer">
-        <div class="favoritecontent">
+        <div class="favoritecontent" cdkDrag>
           <img height=70  px src="../../assets/burger.jpg">
           <ul>
             <li class="first"><span>Burger Cheese Big Size</span></li>

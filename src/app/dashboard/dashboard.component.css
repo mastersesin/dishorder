@@ -38,7 +38,6 @@
 }
 
 .favoritewrapper {
-  overflow: hidden;
   white-space: nowrap;
   max-width: 600px;
   max-height: 500px;
@@ -55,7 +54,8 @@
 }
 
 .orderdaynumber {
-  display: inline-block;
+  position:relative;
+  display:inline-block;
   height: 65px;
   width: calc((100% - 14px * 10) / 7);
   margin :10px;
@@ -77,8 +77,16 @@
 }
 
 .favoritecontent {
+  padding: 20px 10px;
+  border-bottom: solid 1px #ccc;
+  color: rgba(0, 0, 0, 0.87);
   display: flex;
-  margin-top: 10px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: move;
+  background: white;
 }
 
 .foodshowwrapper {
@@ -123,9 +131,13 @@ li {
 }
 
 .favoritefoodshowcontainer {
-  display: block;
   height: calc(100% - 40px);
-  overflow: scroll;
+  /* overflow: scroll; */
+  min-height: 60px;
+  background: white;
+  border-radius: 4px;
+  /* overflow: hidden; */
+  display: block;
 }
 
 @media screen and (max-width: 800px) {
@@ -137,8 +149,8 @@ li {
     width: 100%;
   }
   .favoritewrapper {
-    width: 100%;
-    margin: 0;
+    display: inline-block;
+    vertical-align: top;
   }
   #small {
     margin: 0;
@@ -233,3 +245,25 @@ li {
 }
 /* Calendar */
 
+.topright {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+.orderdaynumber-disable {
+  position:relative;
+  display:inline-block;
+  height: 65px;
+  width: calc((100% - 14px * 10) / 7);
+  margin :10px;
+  vertical-align: top;
+  font-size:12px;
+  text-align: center;
+}
+
+.orderdaynumber-disable .orderdaybutton {
+  /* background-color: rgb(243, 243, 243); */
+  border-bottom :0.1px solid rgb(218, 218, 218);
+  color:rgb(161, 161, 161);
+}

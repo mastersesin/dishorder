@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DishorderComponent } from './dishorder/dishorder.component';
@@ -11,15 +10,16 @@ import { DashboardComponent, DashboardDialogComponent } from './dashboard/dashbo
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { OrdersComponent, OrdersDialogComponent } from './orders/orders.component';
-import { SuppliersComponent } from './suppliers/suppliers.component';
+import { SuppliersComponent, SuppliersDialogComponent } from './suppliers/suppliers.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { DemoMaterialModule } from './material.module';
 import { MatButtonModule, MatFormFieldModule, MatInputModule, MatRippleModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { MenuofdishesComponent, MenuofdishesDialogComponent } from './menuofdishes/menuofdishes.component';
 import { GoogleChartsModule } from 'angular-google-charts';
-
+import { HeadernavbarComponent } from './headernavbar/headernavbar.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -33,7 +33,10 @@ import { GoogleChartsModule } from 'angular-google-charts';
     DashboardDialogComponent,
     MenuofdishesComponent,
     MenuofdishesDialogComponent,
-    OrdersDialogComponent
+    OrdersDialogComponent,
+    HeadernavbarComponent,
+    SuppliersComponent,
+    SuppliersDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -48,10 +51,12 @@ import { GoogleChartsModule } from 'angular-google-charts';
     MatInputModule,
     MatRippleModule,
     FormsModule,
-    GoogleChartsModule
+    GoogleChartsModule,
+    DragDropModule
   ],
   entryComponents: [DashboardComponent, DashboardDialogComponent, MenuofdishesComponent,
-    MenuofdishesDialogComponent, OrdersComponent, OrdersDialogComponent],
+    MenuofdishesDialogComponent, OrdersComponent, OrdersDialogComponent,SuppliersComponent,
+     SuppliersDialogComponent],
   providers: [ApicallService],
   bootstrap: [AppComponent],
 })

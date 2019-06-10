@@ -12,7 +12,7 @@
   display: flex;
   -webkit-box-orient: vertical;
   flex-direction: column;
-  height: 570px;
+  height: 550px;
   background-color: #fff;
   border-radius: 4px;
   color: #70787d;
@@ -64,8 +64,15 @@
 }
 
 .err-msg {
-  margin-top: 20px;
+  min-height: 40px;
   text-align: center;
+}
+
+.err-msg p{
+  padding-top:20px;
+  color: #e12b0c;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .login-wrapper-header-secondary {
@@ -86,7 +93,7 @@
 }
 
 .form-login-wrapper {
-	margin: 40px 0;
+	margin: 10px 0;
 }
 
 .form-login-main {
@@ -137,6 +144,7 @@
 }
 
 .more-info{
+  padding: 20px;
 	display: flex;
 	justify-content: center;
 	font-size: 13px;
