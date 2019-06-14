@@ -9,8 +9,17 @@ export interface DialogData {
   styleUrls: ['./suppliers.component.css']
 })
 export class SuppliersDialogComponent implements OnInit {
-  defaultValue = 'VND';
+  defaultValueCurrency = 'VND';
   defaultAM = 'AM';
+  public imagePath;
+  imgURL: any;
+  public message: string;
+  code: string;
+  name: string;
+  email_address: string;
+  phone: string;
+  contact_name: string;
+  currency: string;
   constructor(
     private apicall: ApicallService,
     public dialogRef: MatDialogRef<SuppliersDialogComponent>,
@@ -19,6 +28,42 @@ export class SuppliersDialogComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+  preview(files) {
+    var mimeType = files[0].type;
+    var reader = new FileReader();
+    if (files.length === 0){
+      return;
+    }
+    if (mimeType.match(/image\/*/) == null) {
+      this.message = 'Only images are supported.';
+      return;
+    }
+    this.imagePath = files;
+    reader.readAsDataURL(files[0]);
+    reader.onload = (_event) => {
+      this.imgURL = reader.result;
+    };
+  }
+
+  save() {
+    console.log(this.imagePath);
+    this.apicall.postImage(this.imagePath).subscribe(data => {
+      console.log(data);
+      if (data.code == 16) {
+        this.apicall.postSupplierInfo(
+          this.code,
+          this.name,
+          this.email_address,
+          this.phone,
+          this.contact_name,
+          this.defaultValueCurrency,
+          data.msg).subscribe(data =>{
+            console.log(data);
+          }
+        )
+      }
+    });
   }
 }
 
@@ -48,13 +93,15 @@ export class SuppliersComponent implements OnInit {
   orderAmountColumnName = ['Supplier', 'Total Amount'];
 ;  totalOrderColumnName = ['Order', 'Order'];
   dynamicResize = true;
+  querystring_supplier = '';
   constructor(
     private apicall: ApicallService,
     public dialog: MatDialog,
     ) { }
 
   ngOnInit() {
-    this.apicall.getSuppliers().subscribe(data => {
+    console.log(this.querystring_supplier);
+    this.apicall.getSuppliers(this.querystring_supplier).subscribe(data => {
     // tslint:disable-next-line: forin
       for (let key in data) {
         this.data.push({key: key, value: data[key]});

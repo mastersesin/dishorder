@@ -34,7 +34,7 @@
     <div class="input-image">
       <div style='width: 40%;padding:5px;'>
         <img style='height:120px;max-width:160px;display:block;margin:auto;' [src]="imgURL" *ngIf="imgURL">
-        <img style='height:120px;max-width:160px;display:block;margin:auto;' src='../../assets/insert-picture-icon.png'*ngIf="!imgURL">
+        <img style='height:120px;max-width:160px;display:block;margin:auto;' src='../../assets/insert-picture-icon.png' *ngIf="!imgURL">
       </div>
       <div style='width: 60%;margin: auto;'>
         <input style='width: 100%;' #file type="file" accept='image/*' (change)="preview(file.files)" />
