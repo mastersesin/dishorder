@@ -20,6 +20,7 @@ import { MenuofdishesComponent, MenuofdishesDialogComponent } from './menuofdish
 import { GoogleChartsModule } from 'angular-google-charts';
 import { HeadernavbarComponent } from './headernavbar/headernavbar.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatRippleModule,
     FormsModule,
     GoogleChartsModule,
-    DragDropModule
+    DragDropModule,
+    NgxMaterialTimepickerModule
   ],
   entryComponents: [DashboardComponent, DashboardDialogComponent, MenuofdishesComponent,
     MenuofdishesDialogComponent, OrdersComponent, OrdersDialogComponent,SuppliersComponent,

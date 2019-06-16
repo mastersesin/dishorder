@@ -1,7 +1,20 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ApicallService } from '../services/apicall/apicall.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatInputModule } from '@angular/material';
+import { Router } from '@angular/router';
 export interface DialogData {
+  current_code: string;
+  code: string;
+  name: string;
+  email_address: string;
+  phone: string;
+  contact_name: string;
+  currency: string;
+  min_quantity: string;
+  min_amount: string;
+  deadline: string;
+  imgURL: any;
+  is_edit: boolean;
 }
 @Component({
   selector: 'app-suppliers-dialog',
@@ -9,30 +22,49 @@ export interface DialogData {
   styleUrls: ['./suppliers.component.css']
 })
 export class SuppliersDialogComponent implements OnInit {
-  defaultValueCurrency = 'VND';
-  defaultAM = 'AM';
   public imagePath;
   imgURL: any;
   public message: string;
+  current_code: string;
   code: string;
   name: string;
   email_address: string;
   phone: string;
   contact_name: string;
   currency: string;
+  min_quantity: string;
+  min_amount: string;
+  deadline: string;
+  is_edit: boolean;
   constructor(
     private apicall: ApicallService,
     public dialogRef: MatDialogRef<SuppliersDialogComponent>,
+    private router: Router,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {}
 
   ngOnInit() {
-
+    console.log(this.data);
+    this.current_code = this.data.code;
+    this.code = this.data.code;
+    this.name = this.data.name;
+    this.email_address = this.data.email_address;
+    this.phone = this.data.phone;
+    this.contact_name = this.data.contact_name;
+    this.currency = this.data.currency;
+    this.min_quantity = this.data.min_quantity;
+    this.min_amount = this.data.min_amount;
+    this.deadline = this.data.deadline;
+    this.imgURL = this.data.imgURL;
+    this.is_edit = this.data.is_edit;
+  }
+  test(){
+    console.log(this.code);
   }
   preview(files) {
-    var mimeType = files[0].type;
-    var reader = new FileReader();
-    if (files.length === 0){
+    let mimeType = files[0].type;
+    let reader = new FileReader();
+    if (files.length === 0) {
       return;
     }
     if (mimeType.match(/image\/*/) == null) {
@@ -47,23 +79,71 @@ export class SuppliersDialogComponent implements OnInit {
   }
 
   save() {
-    console.log(this.imagePath);
+    if (this.is_edit && !this.imagePath) {
+      this.apicall.putSupplierInfo(
+        this.current_code,
+        this.code,
+        this.name,
+        this.email_address,
+        this.phone,
+        this.contact_name,
+        this.currency,
+        this.min_quantity,
+        this.min_amount,
+        this.deadline,
+        ''
+        // data.msg // API return img_URL
+        ).subscribe(data => {
+          console.log(data);
+        }
+      );
+    } else if ( this.is_edit && this.imagePath ) {
+      this.apicall.postImage(this.imagePath).subscribe(data => {
+        if (data.code === 16) {
+          this.apicall.putSupplierInfo(
+            this.current_code,
+            this.code,
+            this.name,
+            this.email_address,
+            this.phone,
+            this.contact_name,
+            this.currency,
+            this.min_quantity,
+            this.min_amount,
+            this.deadline,
+            data.msg
+            ).subscribe(data => {
+              console.log(data);
+            }
+          );
+        }
+      });
+    } else {
     this.apicall.postImage(this.imagePath).subscribe(data => {
-      console.log(data);
-      if (data.code == 16) {
-        this.apicall.postSupplierInfo(
-          this.code,
-          this.name,
-          this.email_address,
-          this.phone,
-          this.contact_name,
-          this.defaultValueCurrency,
-          data.msg).subscribe(data =>{
-            console.log(data);
-          }
-        )
-      }
-    });
+      if (data.code === 16) {
+          this.apicall.postSupplierInfo(
+            this.code,
+            this.name,
+            this.email_address,
+            this.phone,
+            this.contact_name,
+            this.currency,
+            this.min_quantity,
+            this.min_amount,
+            this.deadline,
+            data.msg // API return img_URL
+            ).subscribe(data => {
+              console.log(data);
+            }
+          );
+        }
+      });
+    }
+    this.dialogRef.close();
+    setTimeout(() => {
+      this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+      this.router.navigate(['/suppliers']));
+    }, 500);
   }
 }
 
@@ -91,34 +171,59 @@ export class SuppliersComponent implements OnInit {
     //
   };
   orderAmountColumnName = ['Supplier', 'Total Amount'];
-;  totalOrderColumnName = ['Order', 'Order'];
+  totalOrderColumnName = ['Order', 'Order'];
   dynamicResize = true;
   querystring_supplier = '';
   constructor(
     private apicall: ApicallService,
     public dialog: MatDialog,
+    private router: Router
     ) { }
 
   ngOnInit() {
-    console.log(this.querystring_supplier);
     this.apicall.getSuppliers(this.querystring_supplier).subscribe(data => {
-    // tslint:disable-next-line: forin
-      for (let key in data) {
-        this.data.push({key: key, value: data[key]});
+      console.log(data);
+      // tslint:disable-next-line: forin
+      for (const key in data.msg) {
+        this.data.push({key, value: data.msg[key]});
       }
+      console.log(this.data);
       setTimeout(() => { this.loading = false; }, 300);
     });
   }
 
-  openDialog() {
-    const dialogRef = this.dialog.open(SuppliersDialogComponent, {
-      width: '500px',
-      height: '750px',
-      data: {}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+  openDialog(supplier_object) {
+    if (supplier_object){
+      const dialogRef = this.dialog.open(SuppliersDialogComponent, {
+        width: '500px',
+        height: '700px',
+        data: {
+          current_code : supplier_object.value.code,
+          code : supplier_object.value.code,
+          name: supplier_object.value.name,
+          email_address: supplier_object.value.email_address,
+          phone: supplier_object.value.phone,
+          contact_name: supplier_object.value.contact_name,
+          currency: supplier_object.value.currency,
+          min_quantity: supplier_object.value.minimum_order_quantity,
+          min_amount: supplier_object.value.minimum_order_amount,
+          deadline: supplier_object.value.order_time_deadline,
+          imgURL: supplier_object.value.image_URL,
+          is_edit : true
+        }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+      });
+    } else {
+      const dialogRef = this.dialog.open(SuppliersDialogComponent, {
+        width: '500px',
+        height: '700px',
+        data: {currency: 'VND'}
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+      });
+    }
   }
 }

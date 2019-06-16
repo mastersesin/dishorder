@@ -5,15 +5,15 @@
     </div>
     <div class="main-body" *ngIf="!loading">
       <div class="supplierswrapper">
-        <div class="suppliersdiv" *ngFor="let item of data">
+        <div class="suppliersdiv" *ngFor="let item of data" mat-raised-button (click)="openDialog(item)">
           <div style="padding: 20px">
-            <img height=150px; src="../../assets/logo.png">
+            <img style="height: 150px;max-width: 150px;" src={{item.value.image_URL}}>
           </div>
           <div>
-            <p>{{item.value}}</p>
+            <p>{{item.value.name}}</p>
           </div>
         </div>
-        <div (click)="openDialog()" class="suppliersdiv">
+        <div mat-raised-button (click)="openDialog()" class="suppliersdiv">
           <div style="padding: 20px">
             <img height=150px; src="../../assets/button_new.png">
           </div>
