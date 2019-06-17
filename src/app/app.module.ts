@@ -15,7 +15,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DemoMaterialModule } from './material.module';
 import { MatButtonModule, MatFormFieldModule, MatInputModule, MatRippleModule } from '@angular/material';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MenuofdishesComponent, MenuofdishesDialogComponent } from './menuofdishes/menuofdishes.component';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { HeadernavbarComponent } from './headernavbar/headernavbar.component';
@@ -54,7 +54,8 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     FormsModule,
     GoogleChartsModule,
     DragDropModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
+    ReactiveFormsModule
   ],
   entryComponents: [DashboardComponent, DashboardDialogComponent, MenuofdishesComponent,
     MenuofdishesDialogComponent, OrdersComponent, OrdersDialogComponent,SuppliersComponent,

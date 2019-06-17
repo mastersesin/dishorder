@@ -2,10 +2,13 @@
     <div *ngIf="!is_edit" style='margin-top: 18px;'><h3>Create Supplier</h3></div>
     <div *ngIf="is_edit" style='margin-top: 18px;'><h3>Edit Supplier</h3></div>
     <div style='padding:10px;' class='create-dish-form'>
+      <div *ngIf="testErr" style='max-height:10px;text-align: center;font-size: 15px;color: red;'>
+          Please input all the form
+      </div>
       <mat-form-field  style="width:100%;">
         <input (change)="test()" matInput [(ngModel)]="code" placeholder="Supplier code" required>
       </mat-form-field>
-      <mat-form-field  style="width:100%;">
+      <mat-form-field  style="width:100%">
         <input (change)="test()" matInput [(ngModel)]="name" placeholder="Name" required>
       </mat-form-field>
       <mat-form-field  style="width:100%;">
@@ -19,7 +22,7 @@
       </mat-form-field>
       <mat-form-field (change)="test()" style="width:50%">
         <input matInput [(ngModel)]="deadline" placeholder="Order Time Deadline" aria-label="24hr format" [ngxTimepicker]="fullTime" [format]="24"  readonly>
-        <mat-icon matSuffix>alarm</mat-icon>
+        <mat-icon class="test" matSuffix>alarm</mat-icon>
         <ngx-material-timepicker #fullTime></ngx-material-timepicker>
       </mat-form-field>
       <mat-form-field style="width: 33%;padding-right: 10px">

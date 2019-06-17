@@ -1,4 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ApicallService } from '../services/apicall/apicall.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatInputModule } from '@angular/material';
 import { Router } from '@angular/router';
@@ -22,6 +24,8 @@ export interface DialogData {
   styleUrls: ['./suppliers.component.css']
 })
 export class SuppliersDialogComponent implements OnInit {
+  errMsg = ' ';
+  testErr = false;
   public imagePath;
   imgURL: any;
   public message: string;
@@ -36,6 +40,9 @@ export class SuppliersDialogComponent implements OnInit {
   min_amount: string;
   deadline: string;
   is_edit: boolean;
+  emailFormControl = new FormControl('', [
+    Validators.required,
+  ]);
   constructor(
     private apicall: ApicallService,
     public dialogRef: MatDialogRef<SuppliersDialogComponent>,
@@ -79,6 +86,7 @@ export class SuppliersDialogComponent implements OnInit {
   }
 
   save() {
+    return;
     if (this.is_edit && !this.imagePath) {
       this.apicall.putSupplierInfo(
         this.current_code,
