@@ -1,62 +1,46 @@
 <app-headernavbar></app-headernavbar>
 <div class="container-fuild-dashboard">
-  <div class="filtering-options">
-    <div class="filter-button" style='cursor: pointer;' [matMenuTriggerFor]="menu">FILTER OPTIONS</div>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item>Item 1</button>
-      <button mat-menu-item>Item 2</button>
-    </mat-menu>
-    <div class="filter-button" style='cursor: pointer;' [matMenuTriggerFor]="menu">TAGS</div>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item>Item 1</button>
-      <button mat-menu-item>Item 2</button>
-    </mat-menu>
-    <div class="filter-button" style='cursor: pointer;float: right;' (click)="openDialog()">CREATE NEW DISH</div>
+  <div class="main-body-loading" *ngIf="loading">
+    <mat-spinner [diameter]='50' ></mat-spinner>
   </div>
-  <div class="dishescontainer">
-    <!-- <div (click)='openDialog()' style='text-align: center; padding:10px 30px 10px 30px;' class="dishes">
-      <img style='opacity: 0.8;' src='../../assets/insert-picture-icon.png' alt="">
-      <div>
-        <span class="dishesname" style='color: silver;font-weight: 300'>New dish</span>
-      </div>
-    </div> -->
-    <div class="dishestag"> Pizza </div>
-    <div class="dishes">
-      <img src="https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
-      <div class="dishesdescription">
-        <span class="dishesname">Cheese burger super big size</span>
-        <span class="dishessupplier">HKT Restaurant</span>
-      </div>
+  <div *ngIf="!loading">
+    <div class="filtering-options">
+      <div class="filter-button">FILTER BY:</div>
+      <div class="filter-button" *ngIf="supplier_search" style="background-color: white; height: 20px; font-weight: 400">{{supplier_search}} </div>
+      <div class="filter-button" *ngIf="tag_search" style="background-color: white; width:30px; font-weight: 400">{{tag_search}} </div>
+      <div (click)="clear_search()" *ngIf="supplier_search || tag_search" class="filter-button" style="cursor: pointer;background-color: white; width:30px; font-weight: 400"> Clear all </div>
+      <div class="filter-button" style='cursor: pointer;float: right;' (click)="openDialog()">CREATE NEW DISH</div>
     </div>
-    <div class="dishes">
-      <img src="https://images.foody.vn/res/g10/90677/prof/s640x400/foody-mobile-buzza-pizza-jpg-194-636123115822885005.jpg" alt="">
-      <div class="dishesdescription">
-        <span class="dishesname">Pizza</span>
-        <span class="dishessupplier">HKT Restaurant</span>
+    <div style="display: flex;width: 100%" class="dishescontainer">
+      <!-- <div (click)='openDialog()' style='text-align: center; padding:10px 30px 10px 30px;' class="dishes">
+        <img style='opacity: 0.8;' src='../../assets/insert-picture-icon.png' alt="">
+        <div>
+          <span class="dishesname" style='color: silver;font-weight: 300'>New dish</span>
+        </div>
+      </div> -->
+      <div style="flex:1.5;border-right :0.5px solid rgb(190, 190, 190);">
+        <div class="dishestag"> Suppliers </div>
+        <section style="padding-left:10px;margin-top:10px;" class="example-section">
+          <mat-radio-group [(ngModel)]="supplier_search">
+            <div (click)="test()" *ngFor="let supplier of all_supplier"><mat-radio-button class="example-margin" value="{{supplier.value.code}}">{{supplier.value.name}}</mat-radio-button></div>
+          </mat-radio-group>
+        </section>
+        <div class="dishestag"> Tags </div>
+        <section style="padding-left:10px;margin-top:10px;" class="example-section">
+          <mat-radio-group [(ngModel)]="tag_search">
+            <div (click)="test()" *ngFor="let dish of all_dish_tag"><mat-radio-button class="example-margin" value="{{dish.value}}">{{dish.value}}</mat-radio-button></div>
+          </mat-radio-group>
+        </section>
       </div>
-    </div>
-  </div>
-  <div class="dishescontainer">
-    <div class="dishestag"> Beef </div>
-    <div class="dishes">
-      <img src="https://www.sbs.com.au/food/sites/sbs.com.au.food/files/styles/full/public/images/6465_10-broome-satay.jpg?itok=fPKEDrKd" alt="">
-      <div class="dishesdescription">
-        <span class="dishesname">Broome Beef</span>
-        <span class="dishessupplier">HKT Restaurant</span>
-      </div>
-    </div>
-    <div class="dishes">
-      <img src="https://thucthan.com/media/2018/07/beefsteak/cach-lam-beefsteak.jpg" alt="">
-      <div class="dishesdescription">
-        <span class="dishesname">American Beefsteak</span>
-        <span class="dishessupplier">HKT Restaurant</span>
-      </div>
-    </div>
-    <div class="dishes">
-      <img src="https://food.fnr.sndimg.com/content/dam/images/food/fullset/2011/7/26/1/IG1B11_beef-bourguignon_s4x3.jpg.rend.hgtvcom.616.462.suffix/1384540894086.jpeg" alt="">
-      <div class="dishesdescription">
-        <span class="dishesname">Beef Bourguignon</span>
-        <span class="dishessupplier">HKT Restaurant</span>
+      <div style="flex:8;margin-left: 20px">
+        <div class="dishes" *ngFor="let dish of all_dish" (click)="openDialog(dish)">
+          <img style='padding:0 30px 0 30px' *ngIf="dish.value.image_URL === 'http://127.0.0.1:3001/img/insert-picture-icon.png'" src={{dish.value.image_URL}}>
+          <img *ngIf="dish.value.image_URL !== 'http://127.0.0.1:3001/img/insert-picture-icon.png'" src={{dish.value.image_URL}}>
+          <div class="dishesdescription">
+            <span class="dishesname">{{dish.value.dish_name}}</span>
+            <span class="dishessupplier">{{dish.value.supplier_name}}</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>

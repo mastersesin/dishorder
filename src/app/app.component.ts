@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({

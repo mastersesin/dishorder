@@ -2,33 +2,26 @@
   <div><h3>Create dishes</h3></div>
   <div style='padding:10px;' class='create-dish-form'>
     <mat-form-field style="width: 100%;">
-      <mat-select matNativeControl required placeholder="Select Supplier">
-        <mat-option value="TML">TML Restaurant</mat-option>
-        <mat-option value="HKT">HKT Restaurant</mat-option>
+      <mat-select [(value)]="input_supplier" matNativeControl required placeholder="Select Supplier">
+        <mat-option *ngFor="let supplier of suppliers" value="{{supplier.value.code}}">{{supplier.value.name}}</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field  style="width:100%;">
-      <input matInput placeholder="Dish type" required>
+      <input [(ngModel)]="dish_name" matInput placeholder="Dish name" required>
     </mat-form-field>
     <mat-form-field  style="width:100%;">
-      <input matInput placeholder="Dish name" required>
+      <input [(ngModel)]="dish_description" matInput placeholder="Dish description">
     </mat-form-field>
     <mat-form-field  style="width:100%;">
-      <input matInput placeholder="Dish description" required>
+      <input [(ngModel)]="dish_tag" matInput placeholder="Dish tag" required>
     </mat-form-field>
-    <mat-form-field style="width:50%;">
-      <input matInput placeholder="Price" required>
+    <mat-form-field style="width:50%;padding-right: 10px">
+      <input [(ngModel)]="price" matInput placeholder="Price" required>
     </mat-form-field>
     <mat-form-field style="width: 50%;">
-      <mat-select [(value)]='defaultValue' placeholder="Currency">
+      <mat-select [(value)]='currency' placeholder="Currency">
         <mat-option value="VND">VND</mat-option>
         <mat-option value="USD">USD</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field style="width: 100%;">
-      <mat-select placeholder="Dish Tag">
-        <mat-option value="TML">Beef</mat-option>
-        <mat-option value="HKT">Pizza</mat-option>
       </mat-select>
     </mat-form-field>
     <div class="input-image">

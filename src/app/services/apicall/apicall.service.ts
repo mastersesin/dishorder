@@ -26,13 +26,21 @@ export class ApicallService {
       }
     );
   }
-  getDishes(querystring): Observable<any> {
-    if (querystring !== ''){
+  getDishes(dish_name, supplier, tag_search): Observable<any> {
+    if (supplier !== '' || tag_search !== '' || dish_name !== ''){
       var params = new HttpParams;
-      params = params.append('querystring', querystring);
-      return this.httpClient.get('http://127.0.0.1:3001/dishes', { params: params });
+      if (supplier !== '' ) {
+        params = params.append('supplier', supplier);
+      }
+      if (dish_name !== '' ) {
+        params = params.append('dish_name', dish_name);
+      }
+      if (tag_search !== '' ) {
+        params = params.append('tag_sort', tag_search);
+      }
+      return this.httpClient.get('http://127.0.0.1:3001/get-dish', { params: params });
     } else {
-      return this.httpClient.get('http://127.0.0.1:3001/dishes');
+      return this.httpClient.get('http://127.0.0.1:3001/get-dish');
     }
   }
   postImage(files): Observable<any> {
@@ -85,6 +93,46 @@ export class ApicallService {
       return this.httpClient.get('http://127.0.0.1:3001/suppliers', { params: params });
     } else {
       return this.httpClient.get('http://127.0.0.1:3001/suppliers');
+    }
+  }
+
+  postDishInfo(supplier, dish_name, dish_tag, dish_description, unit_price, currency, img_url): Observable<any> {
+    var header = new HttpHeaders();
+    header = header.append('Content-Type', 'application/json');
+    return this.httpClient.post('http://127.0.0.1:3001/create-dish', {
+      'supplier': supplier,
+      'dish_name': dish_name,
+      'dish_tag': dish_tag,
+      'dish_description': dish_description,
+      'unit_price': unit_price,
+      'currency': currency,
+      'uploaded_img_name': img_url
+    }
+  );
+  }
+
+  putDishInfo(dish_id, supplier, dish_name, dish_tag, dish_description, unit_price, currency, img_url): Observable<any> {
+    var header = new HttpHeaders();
+    header = header.append('Content-Type', 'application/json');
+    return this.httpClient.put('http://127.0.0.1:3001/edit-dish', {
+      'dish_id': dish_id,
+      'supplier': supplier,
+      'dish_name': dish_name,
+      'dish_tag': dish_tag,
+      'dish_description': dish_description,
+      'unit_price': unit_price,
+      'currency': currency,
+      'uploaded_img_name': img_url
+    }
+  );
+  }
+  getTags(querystring): Observable<any> {
+    if (querystring !== ''){
+      var params = new HttpParams;
+      params = params.append('querystring', querystring);
+      return this.httpClient.get('http://127.0.0.1:3001/get-tag', { params: params });
+    } else {
+      return this.httpClient.get('http://127.0.0.1:3001/get-tag');
     }
   }
 }

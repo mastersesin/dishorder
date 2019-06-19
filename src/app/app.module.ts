@@ -21,6 +21,7 @@ import { GoogleChartsModule } from 'angular-google-charts';
 import { HeadernavbarComponent } from './headernavbar/headernavbar.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { FilterPipePipe } from './filter-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     OrdersDialogComponent,
     HeadernavbarComponent,
     SuppliersComponent,
-    SuppliersDialogComponent
+    SuppliersDialogComponent,
+    FilterPipePipe
   ],
   imports: [
     BrowserModule,

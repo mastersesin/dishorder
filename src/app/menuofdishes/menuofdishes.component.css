@@ -1,14 +1,16 @@
 .container-fuild-dashboard {
   padding:0 40px 0 40px;
 }
-.dishescontainer {
-  margin-top: 20px;
-  padding: 10px;
-}
 
+.main-body-loading {
+  height: 100%;
+  position: fixed;
+  top: calc( 50% - 25px );
+  left: calc( 50% - 25px );
+}
 .dishes {
-  margin: 10px;
   display: inline-block;
+  margin: 10px;
   height: 200px;
   width: 200px;
   background-color: white;
@@ -67,14 +69,15 @@
 }
 
 .filtering-options {
-  padding:30px 10px 15px 10px;
+  padding-top:20px;
+  padding-bottom: 12px;
   border-bottom :0.5px solid rgb(190, 190, 190);
 }
 
 .filtering-options .filter-button {
   display: inline;
-  height: 70px;
-  margin-right: 50px;
+  height: 50px;
+  margin-right: 20px;
   font-size: 14px;
   font-weight: 600;
   color: rgb(102, 102, 102);
@@ -82,4 +85,8 @@
 
 .filter-button :hover {
   cursor: pointer;
+}
+
+.dishescontainer{
+  display: inline-block;
 }

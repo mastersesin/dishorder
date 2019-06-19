@@ -86,7 +86,6 @@ export class SuppliersDialogComponent implements OnInit {
   }
 
   save() {
-    return;
     if (this.is_edit && !this.imagePath) {
       this.apicall.putSupplierInfo(
         this.current_code,
@@ -99,7 +98,7 @@ export class SuppliersDialogComponent implements OnInit {
         this.min_quantity,
         this.min_amount,
         this.deadline,
-        ''
+        '' // API return img_URL
         // data.msg // API return img_URL
         ).subscribe(data => {
           console.log(data);
@@ -119,16 +118,16 @@ export class SuppliersDialogComponent implements OnInit {
             this.min_quantity,
             this.min_amount,
             this.deadline,
-            data.msg
+            data.msg // API return img_URL
             ).subscribe(data => {
               console.log(data);
             }
           );
         }
       });
-    } else {
-    this.apicall.postImage(this.imagePath).subscribe(data => {
-      if (data.code === 16) {
+    } else if ( !this.is_edit && this.imagePath ) {
+      this.apicall.postImage(this.imagePath).subscribe(data => {
+        if (data.code === 16) {
           this.apicall.postSupplierInfo(
             this.code,
             this.name,
@@ -146,6 +145,22 @@ export class SuppliersDialogComponent implements OnInit {
           );
         }
       });
+    } else {
+      this.apicall.postSupplierInfo(
+        this.code,
+        this.name,
+        this.email_address,
+        this.phone,
+        this.contact_name,
+        this.currency,
+        this.min_quantity,
+        this.min_amount,
+        this.deadline,
+        '' // API return img_URL
+        ).subscribe(data => {
+          console.log(data);
+        }
+      );
     }
     this.dialogRef.close();
     setTimeout(() => {
