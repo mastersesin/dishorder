@@ -32,16 +32,16 @@
   <article class="flex" id="left-side">
     <h1 mat-dialog-title><p>Pick dish for May, {{data.orderDay}}</p></h1>
     <div mat-dialog-content>
-      <div style='max-height: 400px'>
+      <div style='max-height: 400px;overflow: scroll;scroll-behavior: smooth;'>
         <mat-form-field class="search-field">
           <input (keyup)="onKeyUp($event)" matInput [(ngModel)]="myTextarea" placeholder="Search your food" type="foodsearch">
         </mat-form-field>
-        <mat-selection-list style='width: 400px;min-height: 330px;' #shoes>
+        <mat-selection-list style='width: 400px;min-height: 330px;overflow: scroll;' #shoes>
           <mat-list-option style="height:100px;" (click)="test(data.orderDay, dish)" *ngFor="let dish of dishescom" [value]='dish'>
-            <div class="favoritecontent">
-              <img height=70  px src="../../assets/burger.jpg">
+            <div class="favoritecontentfix">
+                <div style='flex:1;max-width: 100px;'><img height=70  px src="{{dish.value.image_URL}}"></div>
               <ul>
-                <li class="first"><span>{{dish.value.dish_code}}</span></li>
+                <li class="first"><span>{{dish.value.dish_name}}</span></li>
                 <li class="second"><span>{{dish.value.supplier_code}}</span></li>
                 <li class="third"><span>Orders : {{dish.value.popularity}} times</span></li>
               </ul>
@@ -54,12 +54,12 @@
   </article>
   <article class="flex" id="right-side">
     <h3>Your Order</h3>
-    <div style='min-height: 400px'>
+    <div style='min-height: 400px; max-height: 400px;overflow: scroll;'>
       <div *ngFor="let dish of dishuserchoose | keyvalue">
-          <div class="favoritecontent">
-            <img height=70  px src="../../assets/burger.jpg">
+          <div class="favoritecontentfix_new">
+            <div style='flex:1;max-width: 100px;'><img height=70  px src="{{dish.value.value.image_URL}}"></div>
             <ul>
-              <li class="first"><span>{{dish.value.value.dish_code}}</span></li>
+              <li class="first"><span>{{dish.value.value.dish_name}}</span></li>
               <li class="third"><span>Quantity <img src='../../assets/decrease.svg' (click)="removeAdded(dish.key)">{{dish.value.quantity}}<img src='../../assets/increase.svg' (click)="addMore(dish.key)"></span></li>
               <li class="second">
                 <span>

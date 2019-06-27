@@ -89,6 +89,15 @@
   background: white;
 }
 
+.favoritecontentfix {
+  display: flex;
+}
+
+.favoritecontentfix_new {
+  display: flex;
+  margin: 20px;
+}
+
 .foodshowwrapper {
   order: 1;
 }

@@ -27,7 +27,7 @@ export class DashboardDialogComponent  implements OnInit {
   dishuserchoose = {};
   myTextarea: string;
   ngOnInit() {
-    this.apicall.getDishes('').subscribe(data => {
+    this.apicall.getDishes('', '', '').subscribe(data => {
       console.log(data);
       // tslint:disable-next-line: forin
       for (let key in data.msg) {
@@ -45,6 +45,7 @@ export class DashboardDialogComponent  implements OnInit {
   }
 
   test(orderDay, dish) {
+    console.log(this.dishuserchoose)
     console.log('hihi');
     this.chooseDay = orderDay;
     if (!(dish.key in this.dishuserchoose)) {
@@ -63,6 +64,8 @@ export class DashboardDialogComponent  implements OnInit {
     console.log(this.dishuserchoose[dish_code]['quantity']);
   }
 
+
+
   removeAdded(dish_code) {
     if (this.dishuserchoose[dish_code]['quantity'] > 1) {
       this.dishuserchoose[dish_code]['quantity']--;
@@ -74,7 +77,7 @@ export class DashboardDialogComponent  implements OnInit {
     this.dialogRef.close();
     const dialogRef = this.dialog.open(MenuofdishesDialogComponent, {
       width: '500px',
-      height: '550px',
+      height: '620px',
       data: {}
     });
 
@@ -90,7 +93,7 @@ export class DashboardDialogComponent  implements OnInit {
       this.dishescom = [];
       console.log('hihi');
       setTimeout(() => {
-        this.apicall.getDishes(this.myTextarea).subscribe(data => {
+        this.apicall.getDishes(this.myTextarea, '', '').subscribe(data => {
           console.log(data);
           // tslint:disable-next-line: forin
           for (let key in data.msg) {
@@ -102,9 +105,10 @@ export class DashboardDialogComponent  implements OnInit {
   }
 
   onSave(shoes): void {
-    var selectedOpt = shoes.selectedOptions.selected;
-    console.log(selectedOpt);
-    this.dialogRef.close();
+    console.log(this.dishuserchoose);
+    this.apicall.postOrderInfo(this.dishuserchoose).subscribe(data => {
+      console.log(data);
+    });
   }
 }
 

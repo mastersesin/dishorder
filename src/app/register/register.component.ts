@@ -16,6 +16,7 @@ export class RegisterComponent implements OnInit {
   passwordInput: string;
   firstName: string;
   familyName: string;
+  passwordRetype: string;
   constructor(
     private apicall: ApicallService,
     private router: Router
@@ -39,15 +40,28 @@ export class RegisterComponent implements OnInit {
     this.loading = true;
     this.opacity = 0.3;
     this.visibility = 'visible';
-    this.apicall.postRegisterInfo(this.emailInput, this.passwordInput, this.firstName, this.familyName).subscribe(data => {
-    // tslint:disable-next-line: forin
-      console.log(data.msg);
-      this.apiMsg = data.msg;
+    if (this.passwordInput !== this.passwordRetype) {
+      this.apiMsg = 'Password not match';
       setTimeout(() => {
         this.loading = false;
         this.opacity = 1;
         this.visibility = 'hidden';
-      }, 1000);
+      }, 300);
+      return false;
+    }
+    this.apicall.postRegisterInfo(this.emailInput,
+      this.passwordInput, this.passwordRetype, this.firstName, this.familyName).subscribe(data => {
+    // tslint:disable-next-line: forin
+        if (data.code === 1) {
+          this.router.navigate(['/']);
+        } else {
+          setTimeout(() => {
+            this.loading = false;
+            this.opacity = 1;
+            this.visibility = 'hidden';
+          }, 300);
+          this.apiMsg = data.msg;
+        }
     });
 
   }

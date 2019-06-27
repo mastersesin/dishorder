@@ -13,16 +13,20 @@ export class ApicallService {
   postLoginInfo(email, password): Observable<any> {
     var header = new HttpHeaders();
     header = header.append('Content-Type', 'application/json');
-    return this.httpClient.post('http://127.0.0.1:3001/login', {'email': email, 'password': password});
+    return this.httpClient.post('http://127.0.0.1:3001/login', {
+      'email_address': email,
+      'password': password});
   }
-  postRegisterInfo(email, password, finame, faname): Observable<any> {
+  postRegisterInfo(email_address, password, password_retype, first_name, family_name): Observable<any> {
     var header = new HttpHeaders();
     header = header.append('Content-Type', 'application/json');
     return this.httpClient.post('http://127.0.0.1:3001/register', {
-        'email_address': email,
+        'email_address': email_address,
         'password': password,
-        'first_name': finame,
-        'family_name': faname
+        'password_retype': password_retype,
+        'first_name': first_name,
+        'family_name': family_name,
+
       }
     );
   }
@@ -134,5 +138,21 @@ export class ApicallService {
     } else {
       return this.httpClient.get('http://127.0.0.1:3001/get-tag');
     }
+  }
+
+  getDishLay(supplier, tag_sort): Observable<any> {
+    var params = new HttpParams;
+    params = params.append('supplier', supplier);
+    params = params.append('tag_sort', tag_sort);
+    return this.httpClient.get('http://127.0.0.1:3001/get-dish-lay', { params: params });
+  }
+
+  postOrderInfo(dishchoose): Observable<any> {
+    var header = new HttpHeaders();
+    header = header.append('Content-Type', 'application/json');
+    return this.httpClient.post('http://127.0.0.1:3001/foodorder', {
+      'token': localStorage.getItem('token'),
+      'dishchoose': dishchoose,
+    });
   }
 }

@@ -1,5 +1,7 @@
 <div class='dishes-container'>
-  <div><h3>Create dishes</h3></div>
+  <div><h3 *ngIf="!is_edit">Create dishes</h3></div>
+  <div><h3 *ngIf="is_edit">Edit dishes</h3></div>
+  <div style='display: flex;justify-content: center;color:red' *ngIf="errMsg">{{errMsg}}</div>
   <div style='padding:10px;' class='create-dish-form'>
     <mat-form-field style="width: 100%;">
       <mat-select [(value)]="input_supplier" matNativeControl required placeholder="Select Supplier">

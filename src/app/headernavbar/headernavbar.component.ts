@@ -29,4 +29,9 @@ export class HeadernavbarComponent implements OnInit {
     elementActive.classList.add('active');
     this.router.navigate((['/' + id]));
   }
+
+  logout() {
+    localStorage.clear();
+    this.router.navigate((['/']));
+  }
 }

@@ -6,9 +6,13 @@
   <div *ngIf="!loading">
     <div class="filtering-options">
       <div class="filter-button">FILTER BY:</div>
-      <div class="filter-button" *ngIf="supplier_search" style="background-color: white; height: 20px; font-weight: 400">{{supplier_search}} </div>
-      <div class="filter-button" *ngIf="tag_search" style="background-color: white; width:30px; font-weight: 400">{{tag_search}} </div>
-      <div (click)="clear_search()" *ngIf="supplier_search || tag_search" class="filter-button" style="cursor: pointer;background-color: white; width:30px; font-weight: 400"> Clear all </div>
+      <div class="filter-button" *ngFor="let search of supplier_search" style="background-color: white; height: 20px; font-weight: 400">
+        {{search}}
+      </div>
+      <div class="filter-button" *ngFor="let search of tag_search" style="background-color: white; width:30px; font-weight: 400">
+        {{search}}
+      </div>
+      <div (click)="clear_search()" *ngIf="supplier_search.length || tag_search.length" class="filter-button" style="cursor: pointer;background-color: white; width:30px; font-weight: 400"> Clear all </div>
       <div class="filter-button" style='cursor: pointer;float: right;' (click)="openDialog()">CREATE NEW DISH</div>
     </div>
     <div style="display: flex;width: 100%" class="dishescontainer">
@@ -21,15 +25,19 @@
       <div style="flex:1.5;border-right :0.5px solid rgb(190, 190, 190);">
         <div class="dishestag"> Suppliers </div>
         <section style="padding-left:10px;margin-top:10px;" class="example-section">
-          <mat-radio-group [(ngModel)]="supplier_search">
-            <div (click)="test()" *ngFor="let supplier of all_supplier"><mat-radio-button class="example-margin" value="{{supplier.value.code}}">{{supplier.value.name}}</mat-radio-button></div>
-          </mat-radio-group>
+          <mat-selection-list #shoes>
+            <mat-list-option *ngFor="let supplier of all_supplier" [selected]="checkStateSupplier(supplier.value.code)" (click)="addSupplierNameToSearch(supplier.value.code)">
+              {{supplier.value.name}}
+            </mat-list-option>
+          </mat-selection-list>
         </section>
         <div class="dishestag"> Tags </div>
         <section style="padding-left:10px;margin-top:10px;" class="example-section">
-          <mat-radio-group [(ngModel)]="tag_search">
-            <div (click)="test()" *ngFor="let dish of all_dish_tag"><mat-radio-button class="example-margin" value="{{dish.value}}">{{dish.value}}</mat-radio-button></div>
-          </mat-radio-group>
+          <mat-selection-list #shoes>
+            <mat-list-option *ngFor="let tag of all_dish_tag" [selected]="checkStateTag(tag.value)" (click)="addTagNameToSearch(tag.value)">
+              {{tag.value}}
+            </mat-list-option>
+          </mat-selection-list>
         </section>
       </div>
       <div style="flex:8;margin-left: 20px">

@@ -24,7 +24,7 @@ export interface DialogData {
   styleUrls: ['./suppliers.component.css']
 })
 export class SuppliersDialogComponent implements OnInit {
-  errMsg = ' ';
+  errMsg: string;
   testErr = false;
   public imagePath;
   imgURL: any;
@@ -101,7 +101,18 @@ export class SuppliersDialogComponent implements OnInit {
         '' // API return img_URL
         // data.msg // API return img_URL
         ).subscribe(data => {
-          console.log(data);
+          if (data.code === 1){
+            this.dialogRef.close();
+            setTimeout(() => {
+              this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+              this.router.navigate(['/suppliers']));
+            }, 500);
+          }
+          else {
+            this.errMsg = '';
+            setTimeout(() => { this.errMsg = data.msg; }, 300);
+            console.log(data.msg);
+          }
         }
       );
     } else if ( this.is_edit && this.imagePath ) {
@@ -120,7 +131,18 @@ export class SuppliersDialogComponent implements OnInit {
             this.deadline,
             data.msg // API return img_URL
             ).subscribe(data => {
-              console.log(data);
+              if (data.code === 1){
+                this.dialogRef.close();
+                setTimeout(() => {
+                  this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+                  this.router.navigate(['/suppliers']));
+                }, 500);
+              }
+              else {
+                this.errMsg = '';
+                setTimeout(() => { this.errMsg = data.msg; }, 300);
+                console.log(data.msg);
+              }
             }
           );
         }
@@ -140,7 +162,18 @@ export class SuppliersDialogComponent implements OnInit {
             this.deadline,
             data.msg // API return img_URL
             ).subscribe(data => {
-              console.log(data);
+              if (data.code === 1){
+                this.dialogRef.close();
+                setTimeout(() => {
+                  this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+                  this.router.navigate(['/suppliers']));
+                }, 500);
+              }
+              else {
+                this.errMsg = '';
+                setTimeout(() => { this.errMsg = data.msg; }, 300);
+                console.log(data.msg);
+              }
             }
           );
         }
@@ -158,15 +191,21 @@ export class SuppliersDialogComponent implements OnInit {
         this.deadline,
         '' // API return img_URL
         ).subscribe(data => {
-          console.log(data);
+          if (data.code === 1){
+            this.dialogRef.close();
+            setTimeout(() => {
+              this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+              this.router.navigate(['/suppliers']));
+            }, 500);
+          }
+          else {
+            this.errMsg = '';
+            setTimeout(() => { this.errMsg = data.msg; }, 300);
+            console.log(data.msg);
+          }
         }
       );
     }
-    this.dialogRef.close();
-    setTimeout(() => {
-      this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-      this.router.navigate(['/suppliers']));
-    }, 500);
   }
 }
 
@@ -219,7 +258,7 @@ export class SuppliersComponent implements OnInit {
     if (supplier_object){
       const dialogRef = this.dialog.open(SuppliersDialogComponent, {
         width: '500px',
-        height: '700px',
+        height: '710px',
         data: {
           current_code : supplier_object.value.code,
           code : supplier_object.value.code,
@@ -241,7 +280,7 @@ export class SuppliersComponent implements OnInit {
     } else {
       const dialogRef = this.dialog.open(SuppliersDialogComponent, {
         width: '500px',
-        height: '700px',
+        height: '710px',
         data: {currency: 'VND'}
       });
       dialogRef.afterClosed().subscribe(result => {

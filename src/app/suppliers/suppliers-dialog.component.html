@@ -2,8 +2,8 @@
     <div *ngIf="!is_edit" style='margin-top: 18px;'><h3>Create Supplier</h3></div>
     <div *ngIf="is_edit" style='margin-top: 18px;'><h3>Edit Supplier</h3></div>
     <div style='padding:10px;' class='create-dish-form'>
-      <div *ngIf="testErr" style='max-height:10px;text-align: center;font-size: 15px;color: red;'>
-          Please input all the form
+      <div *ngIf="errMsg" style='max-height:10px;text-align: center;font-size: 15px;color: red;margin-bottom: 20px;'>
+          {{errMsg}}
       </div>
       <mat-form-field  style="width:100%;">
         <input (change)="test()" matInput [(ngModel)]="code" placeholder="Supplier code" required>

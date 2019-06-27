@@ -35,6 +35,7 @@ export interface DialogData {
   styleUrls: ['./menuofdishes.component.css']
 })
 export class MenuofdishesDialogComponent implements OnInit {
+  errMsg = '';
   public imagePath;
   imgURL: any;
   public message: string;
@@ -98,7 +99,7 @@ export class MenuofdishesDialogComponent implements OnInit {
 
   save() {
     if (this.is_edit && !this.imagePath) {
-      console.log(this.dish_id);
+      console.log(this.suppliers);
       this.apicall.putDishInfo(
         this.dish_id,
         this.input_supplier,
@@ -109,7 +110,17 @@ export class MenuofdishesDialogComponent implements OnInit {
         this.currency,
         ''
       ).subscribe(data => {
-        console.log(data);
+        if (data.code === 1) {
+          this.dialogRef.close();
+          setTimeout(() => {
+            this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+            this.router.navigate(['/dishes']));
+          }, 500);
+        } else {
+          this.errMsg = '';
+          setTimeout(() => { this.errMsg = data.msg; }, 300);
+          console.log(data.msg);
+        }
       });
     } else if ( this.is_edit && this.imagePath) {
       this.apicall.postImage(this.imagePath).subscribe(data => {
@@ -124,11 +135,22 @@ export class MenuofdishesDialogComponent implements OnInit {
             this.currency,
             data.msg
           ).subscribe(data => {
-            console.log(data);
+            if (data.code === 1) {
+              this.dialogRef.close();
+              setTimeout(() => {
+                this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+                this.router.navigate(['/dishes']));
+              }, 500);
+            } else {
+              this.errMsg = '';
+              setTimeout(() => { this.errMsg = data.msg; }, 300);
+              console.log(data.msg);
+            }
           });
         }
       });
     } else if ( !this.is_edit && !this.imagePath) {
+      console.log(this.input_supplier);
       this.apicall.postDishInfo(
         this.input_supplier,
         this.dish_name,
@@ -139,6 +161,17 @@ export class MenuofdishesDialogComponent implements OnInit {
         ''
       ).subscribe(data => {
         console.log(data);
+        if (data.code === 1) {
+          this.dialogRef.close();
+          setTimeout(() => {
+            this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+            this.router.navigate(['/dishes']));
+          }, 500);
+        } else {
+          this.errMsg = '';
+          setTimeout(() => { this.errMsg = data.msg; }, 300);
+          console.log(data.msg);
+        }
       });
     } else {
       this.apicall.postImage(this.imagePath).subscribe(data => {
@@ -152,16 +185,21 @@ export class MenuofdishesDialogComponent implements OnInit {
             this.currency,
             data.msg
           ).subscribe(data => {
-            console.log(data);
+            if (data.code === 1) {
+              this.dialogRef.close();
+              setTimeout(() => {
+                this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+                this.router.navigate(['/dishes']));
+              }, 500);
+            } else {
+              this.errMsg = '';
+              setTimeout(() => { this.errMsg = data.msg; }, 300);
+              console.log(data.msg);
+            }
           });
         }
       });
     }
-    this.dialogRef.close();
-    setTimeout(() => {
-      this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-      this.router.navigate(['/dishes']));
-    }, 500);
   }
 }
 
@@ -175,8 +213,8 @@ export class MenuofdishesComponent implements OnInit {
   all_supplier = [];
   all_dish_tag = []
   loading = true;
-  supplier_search = '';
-  tag_search = '';
+  supplier_search = [];
+  tag_search = [];
   constructor(
     private router: Router,
     public dialog: MatDialog,
@@ -210,13 +248,45 @@ export class MenuofdishesComponent implements OnInit {
   }
 
   clear_search(){
-    this.supplier_search = '';
-    this.tag_search = '';
+    this.supplier_search = [];
+    this.tag_search = [];
     setTimeout(() => {
-      this.apicall.getDishes('', this.supplier_search, this.tag_search).subscribe(data => {
+      this.apicall.getDishLay(this.supplier_search, this.tag_search).subscribe(data => {
         this.all_dish = [];
-        console.log(data);
-        // tslint:disable-next-line: forin
+        for (const key in data.msg) {
+          this.all_dish.push({key, value: data.msg[key]});
+        }
+      });
+    ; }, 300);
+  }
+
+  addSupplierNameToSearch(name) {
+    console.log(name)
+    if (!(this.supplier_search.indexOf(name) !== -1)) {
+      this.supplier_search.push(name);
+      console.log(this.supplier_search)
+    } else {
+        delete this.supplier_search[this.supplier_search.indexOf(name)];
+    }
+    setTimeout(() => {
+      this.apicall.getDishLay(this.supplier_search, this.tag_search).subscribe(data => {
+        this.all_dish = [];
+        for (const key in data.msg) {
+          this.all_dish.push({key, value: data.msg[key]});
+        }
+      });
+    ; }, 300);
+  }
+  addTagNameToSearch(name) {
+    if (!(this.tag_search.indexOf(name) !== -1)) {
+      this.tag_search.push(name);
+      console.log(this.tag_search)
+    } else {
+        delete this.tag_search[this.tag_search.indexOf(name)];
+    }
+    setTimeout(() => {
+      this.apicall.getDishLay(this.supplier_search, this.tag_search).subscribe(data => {
+        this.all_dish = [];
         for (const key in data.msg) {
           this.all_dish.push({key, value: data.msg[key]});
         }
@@ -225,16 +295,16 @@ export class MenuofdishesComponent implements OnInit {
   }
 
   test(){
-    setTimeout(() => {
-      this.apicall.getDishes('', this.supplier_search, this.tag_search).subscribe(data => {
-        this.all_dish = [];
-        console.log(data);
-        // tslint:disable-next-line: forin
-        for (const key in data.msg) {
-          this.all_dish.push({key, value: data.msg[key]});
-        }
-      });
-    ; }, 300);
+
+  }
+
+  checkStateSupplier(supplier_name){
+    console.log(supplier_name);
+    return this.supplier_search.indexOf(supplier_name) !== -1;
+  }
+
+  checkStateTag(tag_name) {
+    return this.tag_search.indexOf(tag_name) !== -1;
   }
 
   openDialog(dish_object) {
@@ -242,7 +312,7 @@ export class MenuofdishesComponent implements OnInit {
       console.log(dish_object)
       const dialogRef = this.dialog.open(MenuofdishesDialogComponent, {
         width: '500px',
-        height: '600px',
+        height: '620px',
         data: {
           dish_id : dish_object.value.dish_id,
           input_supplier: dish_object.value.supplier_code,
@@ -261,8 +331,8 @@ export class MenuofdishesComponent implements OnInit {
     } else {
       const dialogRef = this.dialog.open(MenuofdishesDialogComponent, {
         width: '500px',
-        height: '600px',
-        data: {}
+        height: '620px',
+        data: {currency: 'VND'}
       });
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');
