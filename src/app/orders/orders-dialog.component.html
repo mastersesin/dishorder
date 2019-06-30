@@ -1,5 +1,5 @@
 <div>
-  <h3>Order Details - TML - Friday, April 21</h3>
+  <h3>Order Details - {{data['data'].value.supplier_code}} - {{data['data'].value.order_day_word}}, {{data['data'].value.order_month}} {{data['data'].value.order_day}}</h3>
   <div class='detail-table'>
     <div class="table">
       <div>
@@ -13,22 +13,13 @@
             <th>Total Amount</th>
             <th></th>
           </tr>
-          <tr>
-            <td>Mr - Dupire</td>
-            <td>None</td>
-            <td>Cheese Burgur Big Size</td>
-            <td>1</td>
-            <td>120,000 VND</td>
-            <td>120,000 VND</td>
-            <td><img src="../../assets/delete.svg"></td>
-          </tr>
-          <tr>
-            <td>Mr - Dupire</td>
-            <td>None</td>
-            <td>Cheese Burgur Big Size</td>
-            <td>1</td>
-            <td>120,000 VND</td>
-            <td>120,000 VND</td>
+          <tr *ngFor="let item of all_user_order">
+            <td>{{item.value.user_name}}</td>
+            <td>{{item.value.on_behalf_of_customer}}</td>
+            <td>{{item.value.dish_name}}</td>
+            <td>{{item.value.quantity}}</td>
+            <td>{{item.value.unit_price}} VND</td>
+            <td>{{item.value.quantity * item.value.unit_price}} VND</td>
             <td><img src="../../assets/delete.svg"></td>
           </tr>
         </table>

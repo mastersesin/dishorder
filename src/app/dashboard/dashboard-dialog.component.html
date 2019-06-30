@@ -30,13 +30,13 @@
     can be found in the LICENSE file at http://angular.io/license -->
 <div class="flex-container">
   <article class="flex" id="left-side">
-    <h1 mat-dialog-title><p>Pick dish for May, {{data.orderDay}}</p></h1>
+    <h1 mat-dialog-title><p>Pick dish for July, {{data.orderDay}}</p></h1>
     <div mat-dialog-content>
       <div style='max-height: 400px;overflow: scroll;scroll-behavior: smooth;'>
         <mat-form-field class="search-field">
           <input (keyup)="onKeyUp($event)" matInput [(ngModel)]="myTextarea" placeholder="Search your food" type="foodsearch">
         </mat-form-field>
-        <mat-selection-list style='width: 400px;min-height: 330px;overflow: scroll;' #shoes>
+        <mat-selection-list id='hihi' style='width: 400px;min-height: 330px;overflow: scroll;' #shoes>
           <mat-list-option style="height:100px;" (click)="test(data.orderDay, dish)" *ngFor="let dish of dishescom" [value]='dish'>
             <div class="favoritecontentfix">
                 <div style='flex:1;max-width: 100px;'><img height=70  px src="{{dish.value.image_URL}}"></div>

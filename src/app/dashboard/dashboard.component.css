@@ -276,3 +276,7 @@ li {
   border-bottom :0.1px solid rgb(218, 218, 218);
   color:rgb(161, 161, 161);
 }
+
+.mat-pseudo-checkbox.mat-pseudo-checkbox-checked {
+  display: none !important;
+}

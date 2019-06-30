@@ -10,6 +10,7 @@ export interface DialogData {
   typesOfShoes: string[];
   orderDay: string;
   dishes: [];
+  whichMonthIsThis: number;
 }
 @Component({
   selector: 'app-dashboard-dialog',
@@ -26,7 +27,9 @@ export class DashboardDialogComponent  implements OnInit {
   chooseDay: string;
   dishuserchoose = {};
   myTextarea: string;
+  whichMonthIsThis: number;
   ngOnInit() {
+    this.whichMonthIsThis = this.data.whichMonthIsThis;
     this.apicall.getDishes('', '', '').subscribe(data => {
       console.log(data);
       // tslint:disable-next-line: forin
@@ -52,6 +55,8 @@ export class DashboardDialogComponent  implements OnInit {
       this.dishuserchoose[dish.key] = dish;
       this.dishuserchoose[dish.key]['quantity'] = 1;
       this.dishuserchoose[dish.key]['onbehalf'] = 'Yourself';
+      this.dishuserchoose[dish.key]['orderday'] = this.chooseDay;
+      this.dishuserchoose[dish.key]['ordermonth'] = this.whichMonthIsThis;
     }
     else {
       delete this.dishuserchoose[dish.key];
@@ -104,7 +109,7 @@ export class DashboardDialogComponent  implements OnInit {
     }
   }
 
-  onSave(shoes): void {
+  onSave(): void {
     console.log(this.dishuserchoose);
     this.apicall.postOrderInfo(this.dishuserchoose).subscribe(data => {
       console.log(data);
@@ -124,6 +129,7 @@ export class DashboardComponent implements OnInit {
   isLoading = true;
   thisMonth = [];
   previousMonth = [];
+  whichMonthIsThis: number;
   animal: string;
   name: string;
   myTextarea: string;
@@ -143,6 +149,7 @@ export class DashboardComponent implements OnInit {
       for (let key in data.previous_month) {
         this.previousMonth.push({key: key, value: data.previous_month[key]});
       }
+      this.whichMonthIsThis = data.which_month_is_this;
       setTimeout(() => { this.isLoading = false; }, 300);
     });
   }
@@ -155,7 +162,14 @@ export class DashboardComponent implements OnInit {
     const dialogRef = this.dialog.open(DashboardDialogComponent, {
       width: '1000px',
       height: '600px',
-      data: {myTextarea: this.myTextarea, name: this.name, animal: this.animal, dishes : this.dishes, orderDay : orderDay}
+      data: {
+        myTextarea: this.myTextarea,
+        name: this.name,
+        animal: this.animal,
+        dishes : this.dishes,
+        orderDay : orderDay,
+        whichMonthIsThis: this.whichMonthIsThis
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {

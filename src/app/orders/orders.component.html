@@ -16,14 +16,15 @@
             <th>Total Amount</th>
             <th>Sent on</th>
           </tr>
-          <tr (click)="popupOrderInfo()">
-            <td>Friday, Aprirl 21</td>
-            <td>HKT Restaurant</td>
-            <td>930232</td>
-            <td>1,648,902 VND</td>
-            <td id=active><i class="fas fa-share-square"></i> Send now ?</td>
+          <tr (click)="popupOrderInfo(item)" *ngFor="let item of all_order">
+            <td>{{item.value.order_day_word}}, {{item.value.order_month}} {{item.value.order_day}}</td>
+            <td>{{item.value.supplier_code}}</td>
+            <td>1525000{{item.value.order_id}}</td>
+            <td>{{item.value.total_amount}} VND</td>
+            <td *ngIf="!item.value.sent_date" id=active><button><i class="fas fa-share-square"></i> Send now ?</button></td>
+            <td *ngIf="item.value.sent_date"> {{item.value.sent_date}} </td>
           </tr>
-          <tr>
+          <!-- <tr>
             <td>Friday, Aprirl 20</td>
             <td>KFC Restaurant</td>
             <td>930234</td>
@@ -43,7 +44,7 @@
             <td>930234</td>
             <td>648,902 VND</td>
             <td>Friday, Aprirl 18</td>
-          </tr>
+          </tr> -->
         </table>
       </div>
     </div>
