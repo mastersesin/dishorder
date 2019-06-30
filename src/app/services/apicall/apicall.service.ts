@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -8,19 +9,19 @@ import { Observable } from 'rxjs';
 export class ApicallService {
   constructor( private httpClient: HttpClient ) { }
   getCurrentWeather(): Observable<any> {
-    return this.httpClient.get('http://127.0.0.1:3001/products');
+    return this.httpClient.get(environment.apiServer + '/products');
   }
   postLoginInfo(email, password): Observable<any> {
     var header = new HttpHeaders();
     header = header.append('Content-Type', 'application/json');
-    return this.httpClient.post('http://127.0.0.1:3001/login', {
+    return this.httpClient.post(environment.apiServer +'/login', {
       'email_address': email,
       'password': password});
   }
   postRegisterInfo(email_address, password, password_retype, first_name, family_name): Observable<any> {
     var header = new HttpHeaders();
     header = header.append('Content-Type', 'application/json');
-    return this.httpClient.post('http://127.0.0.1:3001/register', {
+    return this.httpClient.post(environment.apiServer +'/register', {
         'email_address': email_address,
         'password': password,
         'password_retype': password_retype,
@@ -42,21 +43,21 @@ export class ApicallService {
       if (tag_search !== '' ) {
         params = params.append('tag_sort', tag_search);
       }
-      return this.httpClient.get('http://127.0.0.1:3001/get-dish', { params: params });
+      return this.httpClient.get(environment.apiServer +'/get-dish', { params: params });
     } else {
-      return this.httpClient.get('http://127.0.0.1:3001/get-dish');
+      return this.httpClient.get(environment.apiServer +'/get-dish');
     }
   }
   postImage(files): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('file', files[0], files[0].name);
-    return this.httpClient.post('http://127.0.0.1:3001' + '/upload', formData);
+    return this.httpClient.post(environment.apiServer +'' + '/upload', formData);
   }
 
   postSupplierInfo(code, name, email_address, phone, contact_name, currency,min_quantity, min_amout, order_time_deadline, img_url): Observable<any> {
     var header = new HttpHeaders();
     header = header.append('Content-Type', 'application/json');
-    return this.httpClient.post('http://127.0.0.1:3001/create-supplier', {
+    return this.httpClient.post(environment.apiServer +'/create-supplier', {
         'code': code,
         'name': name,
         'email_address': email_address,
@@ -74,7 +75,7 @@ export class ApicallService {
   putSupplierInfo(current_code, code, name, email_address, phone, contact_name, currency,min_quantity, min_amout, order_time_deadline, img_url): Observable<any> {
     var header = new HttpHeaders();
     header = header.append('Content-Type', 'application/json');
-    return this.httpClient.put('http://127.0.0.1:3001/edit-supplier', {
+    return this.httpClient.put(environment.apiServer +'/edit-supplier', {
         'current_code': current_code,
         'code_change_to': code,
         'name': name,
@@ -94,16 +95,16 @@ export class ApicallService {
     if (querystring_supplier !== ''){
       var params = new HttpParams;
       params = params.append('querystring', querystring_supplier);
-      return this.httpClient.get('http://127.0.0.1:3001/suppliers', { params: params });
+      return this.httpClient.get(environment.apiServer +'/suppliers', { params: params });
     } else {
-      return this.httpClient.get('http://127.0.0.1:3001/suppliers');
+      return this.httpClient.get(environment.apiServer +'/suppliers');
     }
   }
 
   postDishInfo(supplier, dish_name, dish_tag, dish_description, unit_price, currency, img_url): Observable<any> {
     var header = new HttpHeaders();
     header = header.append('Content-Type', 'application/json');
-    return this.httpClient.post('http://127.0.0.1:3001/create-dish', {
+    return this.httpClient.post(environment.apiServer +'/create-dish', {
       'supplier': supplier,
       'dish_name': dish_name,
       'dish_tag': dish_tag,
@@ -118,7 +119,7 @@ export class ApicallService {
   putDishInfo(dish_id, supplier, dish_name, dish_tag, dish_description, unit_price, currency, img_url): Observable<any> {
     var header = new HttpHeaders();
     header = header.append('Content-Type', 'application/json');
-    return this.httpClient.put('http://127.0.0.1:3001/edit-dish', {
+    return this.httpClient.put('/edit-dish', {
       'dish_id': dish_id,
       'supplier': supplier,
       'dish_name': dish_name,
@@ -134,9 +135,9 @@ export class ApicallService {
     if (querystring !== ''){
       var params = new HttpParams;
       params = params.append('querystring', querystring);
-      return this.httpClient.get('http://127.0.0.1:3001/get-tag', { params: params });
+      return this.httpClient.get('/get-tag', { params: params });
     } else {
-      return this.httpClient.get('http://127.0.0.1:3001/get-tag');
+      return this.httpClient.get('/get-tag');
     }
   }
 
@@ -144,13 +145,13 @@ export class ApicallService {
     var params = new HttpParams;
     params = params.append('supplier', supplier);
     params = params.append('tag_sort', tag_sort);
-    return this.httpClient.get('http://127.0.0.1:3001/get-dish-lay', { params: params });
+    return this.httpClient.get('/get-dish-lay', { params: params });
   }
 
   postOrderInfo(dishchoose): Observable<any> {
     var header = new HttpHeaders();
     header = header.append('Content-Type', 'application/json');
-    return this.httpClient.post('http://127.0.0.1:3001/foodorder', {
+    return this.httpClient.post('/foodorder', {
       'token': localStorage.getItem('token'),
       'dishchoose': dishchoose,
     });

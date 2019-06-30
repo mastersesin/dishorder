@@ -1,21 +1,23 @@
 # base image
-FROM node:12.2.0
+FROM centos:7.6.1810
 
 # set working directory
 WORKDIR /code
 
 # install chrome for protractor tests
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-RUN apt-get update && apt-get install -yq google-chrome-stable
-RUN apt-get install nano
-
-# add `/app/node_modules/.bin` to $PATH
-ENV PATH /code/node_modules/.bin:$PATH
+RUN yum install -y gcc-c++ make nano
+RUN curl -sL https://rpm.nodesource.com/setup_12.x | bash
+RUN yum -y install nodejs
 
 # install and cache app dependencies
 COPY package.json /code/package.json
-RUN npm install
+RUN rm -rf node_modules/
+RUN npm i --save
+RUN npm i npm@latest -g
+RUN npm install -g @angular/cli
+
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /code/node_modules/.bin:$PATH
 
 # add app
 COPY . .
@@ -24,4 +26,4 @@ COPY . .
 EXPOSE 49153
 
 # start app
-CMD ng serve --host 0.0.0.0 --poll 2000 --disable-host-check
+CMD ["ng", "serve", "--disable-host-check", "--host=0.0.0.0", "--poll=2000"]
