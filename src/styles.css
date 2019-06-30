@@ -16,3 +16,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   width: 0px;
   background: transparent; /* make scrollbar transparent */
 }
+
+#hihi .mat-pseudo-checkbox {
+  display: none !important;
+}

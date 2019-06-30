@@ -155,4 +155,16 @@ export class ApicallService {
       'dishchoose': dishchoose,
     });
   }
+
+  getAllOrders(): Observable<any> {
+    return this.httpClient.get('http://127.0.0.1:3001/getallorders');
+  }
+
+  getAllUserOrders(supplier, order_month, order_day): Observable<any> {
+    var params = new HttpParams;
+    params = params.append('supplier', supplier);
+    params = params.append('order_month', order_month);
+    params = params.append('order_day', order_day);
+    return this.httpClient.get('http://127.0.0.1:3001/getalluserorders', { params: params });
+  }
 }

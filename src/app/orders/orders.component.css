@@ -69,3 +69,7 @@
   min-height: 450px;
   overflow:scroll;
 }
+
+.mat-pseudo-checkbox .mat-pseudo-checkbox-checked {
+  visibility: hidden;
+}
