@@ -60,6 +60,7 @@ export class RegisterComponent implements OnInit {
             this.opacity = 1;
             this.visibility = 'hidden';
           }, 300);
+          console.log(data);
           this.apiMsg = data.msg;
         }
     });
