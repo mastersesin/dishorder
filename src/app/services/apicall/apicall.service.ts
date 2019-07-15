@@ -145,7 +145,7 @@ export class ApicallService {
     var params = new HttpParams;
     params = params.append('supplier', supplier);
     params = params.append('tag_sort', tag_sort);
-    return this.httpClient.get('/get-dish-lay', { params: params });
+    return this.httpClient.get(environment.apiServer + '/get-dish-lay', { params: params });
   }
 
   postOrderInfo(dishchoose): Observable<any> {
