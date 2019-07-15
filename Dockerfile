@@ -11,10 +11,10 @@ RUN yum -y install nodejs
 
 # install and cache app dependencies
 COPY package.json /code/package.json
-RUN mkdir ~/.npm-global
-RUN npm config set prefix '~/.npm-global'
-RUN export PATH=~/.npm-global/bin:$PATH
-RUN source ~/.profile
+#RUN mkdir ~/.npm-global
+#RUN npm config set prefix '~/.npm-global'
+#RUN export PATH=~/.npm-global/bin:$PATH
+#RUN source ~/.profile
 RUN rm -rf node_modules/
 RUN npm i --save
 RUN npm i npm@latest -g
