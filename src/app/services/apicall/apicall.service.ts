@@ -151,7 +151,7 @@ export class ApicallService {
   postOrderInfo(dishchoose): Observable<any> {
     var header = new HttpHeaders();
     header = header.append('Content-Type', 'application/json');
-    return this.httpClient.post('/foodorder', {
+    return this.httpClient.post(environment.apiServer + '/foodorder', {
       'token': localStorage.getItem('token'),
       'dishchoose': dishchoose,
     });
