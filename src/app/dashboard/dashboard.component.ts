@@ -114,6 +114,7 @@ export class DashboardDialogComponent  implements OnInit {
     this.apicall.postOrderInfo(this.dishuserchoose).subscribe(data => {
       console.log(data);
     });
+    this.dialogRef.close();
   }
 }
 
