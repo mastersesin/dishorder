@@ -119,7 +119,7 @@ export class ApicallService {
   putDishInfo(dish_id, supplier, dish_name, dish_tag, dish_description, unit_price, currency, img_url): Observable<any> {
     var header = new HttpHeaders();
     header = header.append('Content-Type', 'application/json');
-    return this.httpClient.put('/edit-dish', {
+    return this.httpClient.put(environment.apiServer + '/edit-dish', {
       'dish_id': dish_id,
       'supplier': supplier,
       'dish_name': dish_name,
