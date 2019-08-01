@@ -186,7 +186,6 @@ li {
     width: calc((100%) / 7);
     margin :0px;
     vertical-align: top;
-    background-color: aqua;
     font-size:14px;
     /* border :1px solid white; */
     text-align: center;
@@ -199,7 +198,6 @@ li {
   height: 100%;
   /* background-color: red; Green */
   border: none;
-  color: black;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -209,7 +207,7 @@ li {
   border-bottom :0.1px solid rgb(145, 144, 144);
 }
 
-.orderdaynumber:hover {
+.orderdaybutton:hover {
   -webkit-transform: scale(1.1);
   -ms-transform: scale(1.1);
   transition-duration: 0.2s;
@@ -255,14 +253,14 @@ li {
 /* Calendar */
 
 .topright {
+  visibility: hidden;
   position: absolute;
   top: 0px;
   right: 0px;
 }
 
 .orderdaynumber-disable {
-  position:relative;
-  display:inline-block;
+  display: inline-block;
   height: 65px;
   width: calc((100% - 14px * 10) / 7);
   margin :10px;
@@ -274,7 +272,6 @@ li {
 .orderdaynumber-disable .orderdaybutton {
   /* background-color: rgb(243, 243, 243); */
   border-bottom :0.1px solid rgb(218, 218, 218);
-  color:rgb(161, 161, 161);
 }
 
 .mat-pseudo-checkbox.mat-pseudo-checkbox-checked {

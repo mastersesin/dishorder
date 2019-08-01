@@ -60,7 +60,7 @@ export class MenuofdishesDialogComponent implements OnInit {
 
   ngOnInit() {
     this.apicall.getSuppliers(this.querystring_supplier).subscribe(data => {
-      console.log(data);
+      // console.log(data);
       // tslint:disable-next-line: forin
       for (const key in data.msg) {
         this.suppliers.push({key, value: data.msg[key]});
@@ -93,13 +93,13 @@ export class MenuofdishesDialogComponent implements OnInit {
     reader.readAsDataURL(files[0]);
     reader.onload = (_event) => {
       this.imgURL = reader.result;
-      console.log(this.imgURL)
+      // console.log(this.imgURL)
     };
   }
 
   save() {
     if (this.is_edit && !this.imagePath) {
-      console.log(this.suppliers);
+      // console.log(this.suppliers);
       this.apicall.putDishInfo(
         this.dish_id,
         this.input_supplier,
@@ -119,7 +119,7 @@ export class MenuofdishesDialogComponent implements OnInit {
         } else {
           this.errMsg = '';
           setTimeout(() => { this.errMsg = data.msg; }, 300);
-          console.log(data.msg);
+          // console.log(data.msg);
         }
       });
     } else if ( this.is_edit && this.imagePath) {
@@ -144,13 +144,13 @@ export class MenuofdishesDialogComponent implements OnInit {
             } else {
               this.errMsg = '';
               setTimeout(() => { this.errMsg = data.msg; }, 300);
-              console.log(data.msg);
+              // console.log(data.msg);
             }
           });
         }
       });
     } else if ( !this.is_edit && !this.imagePath) {
-      console.log(this.input_supplier);
+      // console.log(this.input_supplier);
       this.apicall.postDishInfo(
         this.input_supplier,
         this.dish_name,
@@ -160,7 +160,7 @@ export class MenuofdishesDialogComponent implements OnInit {
         this.currency,
         ''
       ).subscribe(data => {
-        console.log(data);
+        // console.log(data);
         if (data.code === 1) {
           this.dialogRef.close();
           setTimeout(() => {
@@ -170,7 +170,7 @@ export class MenuofdishesDialogComponent implements OnInit {
         } else {
           this.errMsg = '';
           setTimeout(() => { this.errMsg = data.msg; }, 300);
-          console.log(data.msg);
+          // console.log(data.msg);
         }
       });
     } else {
@@ -194,7 +194,7 @@ export class MenuofdishesDialogComponent implements OnInit {
             } else {
               this.errMsg = '';
               setTimeout(() => { this.errMsg = data.msg; }, 300);
-              console.log(data.msg);
+              // console.log(data.msg);
             }
           });
         }

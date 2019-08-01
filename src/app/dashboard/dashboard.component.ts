@@ -150,6 +150,7 @@ export class DashboardComponent implements OnInit {
       for (let key in data.previous_month) {
         this.previousMonth.push({key: key, value: data.previous_month[key]});
       }
+      console.log(data.which_month_is_this);
       this.whichMonthIsThis = data.which_month_is_this;
       setTimeout(() => { this.isLoading = false; }, 300);
     });
