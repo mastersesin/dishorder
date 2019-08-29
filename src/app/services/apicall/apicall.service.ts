@@ -168,4 +168,11 @@ export class ApicallService {
     params = params.append('order_day', order_day);
     return this.httpClient.get(environment.apiServer + '/getalluserorders', { params: params });
   }
+
+  deleteOrder(order_id): Observable<any> {
+    return this.httpClient.delete(environment.apiServer + '/userorders/' + order_id, {
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+      }});
+  }
 }

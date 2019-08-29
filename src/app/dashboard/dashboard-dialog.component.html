@@ -63,8 +63,11 @@
               <li class="third"><span>Quantity <img src='../../assets/decrease.svg' (click)="removeAdded(dish.key)">{{dish.value.quantity}}<img src='../../assets/increase.svg' (click)="addMore(dish.key)"></span></li>
               <li class="second">
                 <span>
-                    <mat-form-field style="width:100%;">
+                    <mat-form-field style="width:50%;">
                       <input matInput placeholder="Order for" [(ngModel)]="dish.value.onbehalf">
+                    </mat-form-field>
+                    <mat-form-field style="width:50%; padding-left: 5px;">
+                      <input matInput placeholder="Notes" [(ngModel)]="dish.value.personal_comment">
                     </mat-form-field>
                 </span>
               </li>

@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { ApicallService } from '../services/apicall/apicall.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatInputModule } from '@angular/material';
 import { DashboardDialogComponent } from '../dashboard/dashboard.component';
+import { NotificationsService } from '../services/notifications/notifications.service';
 
 export interface DialogData {
   item: any;
@@ -17,6 +18,7 @@ export class OrdersDialogComponent implements OnInit {
     private apicall: ApicallService,
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<OrdersDialogComponent>,
+    private notifications: NotificationsService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
   ngOnInit() {
     console.log(this.data);
@@ -27,6 +29,25 @@ export class OrdersDialogComponent implements OnInit {
       console.log(this.all_user_order);
     });
   }
+  delete_order(order_id) {
+    console.log(order_id);
+    this.apicall.deleteOrder(order_id).subscribe(data => {
+      console.log(data);
+      if (data.code === 24) {
+        this.all_user_order = [];
+        this.apicall.getAllUserOrders(this.data['data'].value.supplier_code, this.data['data'].value.order_month, this.data['data'].value.order_day).subscribe(data => {
+          for (const key in data.msg) {
+            this.all_user_order.push({key, value: data.msg[key]});
+          }
+          console.log(this.all_user_order);
+        });
+        this.notifications.showNotification('success', 'Order has been deleted' );
+      } else if (data.code === 22) {
+        this.notifications.showNotification('error', 'Permission denined' );
+      }
+    });
+  }
+
   sendOrder() {
     this.dialogRef.close();
   }

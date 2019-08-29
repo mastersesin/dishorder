@@ -1,3 +1,4 @@
+@import "../../node_modules/angular-notifier/styles.css";
 .container-fuild {
   height: 100vh;
   background-image: linear-gradient(to right, #0882c4, hsl(201, 94%, 51%), #0882c4);

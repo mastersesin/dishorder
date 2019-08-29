@@ -20,7 +20,7 @@
             <td>{{item.value.quantity}}</td>
             <td>{{item.value.unit_price}} VND</td>
             <td>{{item.value.quantity * item.value.unit_price}} VND</td>
-            <td><img src="../../assets/delete.svg"></td>
+            <td><img (click)="delete_order(item.key)" src="../../assets/delete.svg"></td>
           </tr>
         </table>
       </div>

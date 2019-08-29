@@ -3,6 +3,7 @@ import { ApicallService } from '../services/apicall/apicall.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatInputModule } from '@angular/material';
 import { Router } from '@angular/router';
 import { MenuofdishesDialogComponent } from '../menuofdishes/menuofdishes.component';
+import { NotificationsService } from '../services/notifications/notifications.service';
 
 export interface DialogData {
   myTextarea: string;
@@ -22,6 +23,7 @@ export class DashboardDialogComponent  implements OnInit {
     public dialog: MatDialog,
     private apicall: ApicallService,
     public dialogRef: MatDialogRef<DashboardDialogComponent>,
+    private notifications: NotificationsService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
   dishescom = [];
   chooseDay: string;
@@ -40,6 +42,7 @@ export class DashboardDialogComponent  implements OnInit {
   }
 
   change() {
+    this.notifications.showNotification('error', 'Whoops, something went wrong. Probably.' );
     console.log('changed');
   }
 
@@ -57,6 +60,7 @@ export class DashboardDialogComponent  implements OnInit {
       this.dishuserchoose[dish.key]['onbehalf'] = 'Yourself';
       this.dishuserchoose[dish.key]['orderday'] = this.chooseDay;
       this.dishuserchoose[dish.key]['ordermonth'] = this.whichMonthIsThis;
+      this.dishuserchoose[dish.key]['personal_comment'] = null;
     }
     else {
       delete this.dishuserchoose[dish.key];
@@ -115,6 +119,7 @@ export class DashboardDialogComponent  implements OnInit {
       console.log(data);
     });
     this.dialogRef.close();
+    this.notifications.showNotification('success', 'Your order has been placed you can view in orders management.' );
   }
 }
 

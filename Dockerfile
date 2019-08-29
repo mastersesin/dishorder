@@ -19,6 +19,7 @@ RUN rm -rf node_modules/
 RUN npm i --save
 RUN npm i npm@latest -g
 RUN npm install -g @angular/cli
+RUN npm install --save ngx-material-timepicker
 
 # add `/app/node_modules/.bin` to $PATH
 ENV PATH /code/node_modules/.bin:$PATH
