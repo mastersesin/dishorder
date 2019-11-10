@@ -99,7 +99,7 @@ export class SuppliersDialogComponent implements OnInit {
         this.min_quantity,
         this.min_amount,
         this.deadline,
-        this.imgURL // API return img_URL
+        '' // API return img_URL
         // data.msg // API return img_URL
         ).subscribe(data => {
           if (data.code === 1){
