@@ -6,7 +6,8 @@
           {{errMsg}}
       </div>
       <mat-form-field  style="width:100%;">
-        <input (change)="test()" matInput [(ngModel)]="code" placeholder="Supplier code" required>
+        <input *ngIf="is_edit" (change)="test()" matInput [(ngModel)]="code" placeholder="Supplier code" required disabled>
+        <input *ngIf="!is_edit" (change)="test()" matInput [(ngModel)]="code" placeholder="Supplier code" required>
       </mat-form-field>
       <mat-form-field  style="width:100%">
         <input (change)="test()" matInput [(ngModel)]="name" placeholder="Name" required>

@@ -77,7 +77,7 @@ export class ApicallService {
     header = header.append('Content-Type', 'application/json');
     return this.httpClient.put(environment.apiServer +'/edit-supplier', {
         'current_code': current_code,
-        'code_change_to': code,
+        'code': code,
         'name': name,
         'email_address': email_address,
         'phone': phone,

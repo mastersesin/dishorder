@@ -87,6 +87,7 @@ export class SuppliersDialogComponent implements OnInit {
 
   save() {
     if (this.is_edit && !this.imagePath) {
+      console.log(this.code);
       this.apicall.putSupplierInfo(
         this.current_code,
         this.code,
@@ -98,7 +99,7 @@ export class SuppliersDialogComponent implements OnInit {
         this.min_quantity,
         this.min_amount,
         this.deadline,
-        '' // API return img_URL
+        this.imgURL // API return img_URL
         // data.msg // API return img_URL
         ).subscribe(data => {
           if (data.code === 1){
